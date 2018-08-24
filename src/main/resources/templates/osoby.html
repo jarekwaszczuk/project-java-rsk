@@ -145,31 +145,28 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="employee : ${employees}">
-                    <td th:text="${employee.id}">id</td>
-                    <td th:text="${employee.imie}">id</td>
-                    <td th:text="${employee.drugieImie}">id</td>
-                    <td th:text="${employee.nazwisko}">id</td>
-                    <td th:text="${employee.pesel}">id</td>
-                    <td th:text="${employee.ulica}">id</td>
-                    <td th:text="${employee.nrDomu}">id</td>
-                    <td th:text="${employee.nrLokalu}">id</td>
-                    <td th:text="${employee.kodPocztowy}">id</td>
-                    <td th:text="${employee.miejscowosc}">id</td>
-                    <td th:text="${employee.nrTelefonu}">id</td>
-                    <td th:text="${employee.email}">id</td>
+                <tr th:each="person : ${persons}">
+                    <td th:text="${person.id}">id</td>
+                    <td th:text="${person.imie}">id</td>
+                    <td th:text="${person.drugieImie}">id</td>
+                    <td th:text="${person.nazwisko}">id</td>
+                    <td th:text="${person.pesel}">id</td>
+                    <td th:text="${person.ulica}">id</td>
+                    <td th:text="${person.nrDomu}">id</td>
+                    <td th:text="${person.nrLokalu}">id</td>
+                    <td th:text="${person.kodPocztowy}">id</td>
+                    <td th:text="${person.miejscowosc}">id</td>
+                    <td th:text="${person.nrTelefonu}">id</td>
+                    <td th:text="${person.email}">id</td>
                     <td>
-                        <!--<a href="/readone" th:href="@{/readone/employee.id}" class="btn btn-info m-r-1em">Podgląd</a>-->
-                        <!--<a href="/update" th:attr="href=@{/update/employee.id}" class="btn btn-primary m-r-1em">Edycja</a>-->
-                        <!--<a th:href="@{/delete/{id}(id=employee.id)}" class="btn btn-danger m-r-1em">Usuń</a>-->
                         <div class="btn-group" role="group" aria-label="Akcje">
-                            <a href="/employees/readone" th:href="@{'/employees/readone/'+${employee.id}}">
+                            <a href="/persons/readone" th:href="@{'/persons/readone/'+${person.id}}">
                                 <button type="button" class="btn btn-info">Podgląd</button>
                             </a>
-                            <a href="/employees/update" th:attr="href=@{'/employees/update/'+${employee.id}}">
+                            <a href="/persons/update" th:attr="href=@{'/persons/update/'+${person.id}}">
                                 <button type="button" class="btn btn-primary">Edycja</button>
                             </a>
-                            <a href="/employees/update" th:href="@{'/employees/delete/'+${employee.id}}">
+                            <a href="/persons/update" th:href="@{'/persons/delete/'+${person.id}}">
                                 <button type="button" class="btn btn-danger">Usuń</button>
                             </a>
                         </div>
