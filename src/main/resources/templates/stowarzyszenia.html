@@ -120,54 +120,51 @@
                 <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Imię
+                    <th scope="col">Nazwa
                     </th>
-                    <th scope="col">Drugie Imię
+                    <th scope="col">Pełna Nazwa
                     </th>
-                    <th scope="col">Nazwisko
+                    <th scope="col">NIP
                     </th>
-                    <th scope="col">Pesel
+                    <th scope="col">Regon
                     </th>
                     <th scope="col">Ulica
-                    </th>
-                    <th scope="col">Nr Domu
                     </th>
                     <th scope="col">Nr Lokalu
                     </th>
                     <th scope="col">Kod Pocztowy
                     </th>
-                    <th scope="col">Miejscowość
+                    <th scope="col">Poczta
                     </th>
-                    <th scope="col">Nr Telefonu
+                    <th scope="col">Skladka wypadkowa
                     </th>
-                    <th scope="col">E-mail
-                    </th>
+                    <th scope="col">Data składki wypadkowej</th>
                     <th scope="col">Akcja</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="person : ${persons}">
-                    <td th:text="${person.id}">id</td>
-                    <td th:text="${person.imie}">id</td>
-                    <td th:text="${person.drugieImie}">id</td>
-                    <td th:text="${person.nazwisko}">id</td>
-                    <td th:text="${person.pesel}">id</td>
-                    <td th:text="${person.ulica}">id</td>
-                    <td th:text="${person.nrDomu}">id</td>
-                    <td th:text="${person.nrLokalu}">id</td>
-                    <td th:text="${person.kodPocztowy}">id</td>
-                    <td th:text="${person.miejscowosc}">id</td>
-                    <td th:text="${person.nrTelefonu}">id</td>
-                    <td th:text="${person.email}">id</td>
+                <tr th:each="firm : ${firms}">
+                    <td th:text="${firm.id}">id</td>
+                    <td th:text="${firm.name}">id</td>
+                    <td th:text="${firm.fullName}">id</td>
+                    <td th:text="${firm.nip}">id</td>
+                    <td th:text="${firm.regon}">id</td>
+                    <td th:text="${firm.street}">id</td>
+                    <td th:text="${firm.placeNumber}">id</td>
+                    <td th:text="${firm.postalCode}">id</td>
+                    <td th:text="${firm.post}">id</td>
+                    <td th:text="${firm.accidentDues}">id</td>
+                    <td th:text="${firm.accidentDuesDate}">id</td>
+
                     <td>
                         <div class="btn-group" role="group" aria-label="Akcje">
-                            <a href="/persons/readone" th:href="@{'/persons/readone/'+${person.id}}">
+                            <a href="/firms/readone" th:href="@{'/firms/readone/'+${firm.id}}">
                                 <button type="button" class="btn btn-info">Podgląd</button>
                             </a>
-                            <a href="/persons/update" th:attr="href=@{'/persons/update/'+${person.id}}">
+                            <a href="/firms/update" th:attr="href=@{'/firms/update/'+${firm.id}}">
                                 <button type="button" class="btn btn-primary">Edycja</button>
                             </a>
-                            <a href="/persons/update" th:href="@{'/persons/delete/'+${person.id}}">
+                            <a href="/firms/update" th:href="@{'/firms/delete/'+${firm.id}}">
                                 <button type="button" class="btn btn-danger">Usuń</button>
                             </a>
                         </div>
