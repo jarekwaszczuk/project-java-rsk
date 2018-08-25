@@ -119,36 +119,58 @@
             <table class="table table-striped"> <!--table-bordered-->
                 <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nazwa
-                    </th>
-                    <th scope="col">Pełna Nazwa
-                    </th>
-                    <th scope="col">Ulica
-                    </th>
-                    <th scope="col">Akcja</th>
+                    <th scope="col">Właściwość</th>
+                    <th scope="col">Wartość</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="firm : ${firms}">
+                <tr>
+                    <th scope="row">Id</th>
                     <td th:text="${firm.id}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Nazwa</th>
                     <td th:text="${firm.name}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Pełna Nazwa</th>
                     <td th:text="${firm.fullName}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">NIP</th>
+                    <td th:text="${firm.nip}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Regon</th>
+                    <td th:text="${firm.regon}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Ulica</th>
                     <td th:text="${firm.street}">id</td>
-
-                    <td>
-                        <div class="btn-group" role="group" aria-label="Akcje">
-                            <a href="/firms/readone" th:href="@{'/firms/readone/'+${firm.id}}">
-                                <button type="button" class="btn btn-info">Podgląd</button>
-                            </a>
-                            <a href="/firms/update" th:attr="href=@{'/firms/update/'+${firm.id}}">
-                                <button type="button" class="btn btn-primary">Edycja</button>
-                            </a>
-                            <a href="/firms/update" th:href="@{'/firms/delete/'+${firm.id}}">
-                                <button type="button" class="btn btn-danger">Usuń</button>
-                            </a>
-                        </div>
-                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">Nr Lokalu</th>
+                    <td th:text="${firm.placeNumber}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Kod Pocztowy</th>
+                    <td th:text="${firm.postalCode}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Poczta</th>
+                    <td th:text="${firm.post}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Składka Wypadkowa</th>
+                    <td th:text="${firm.accidentDues}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Data Składki Wypadkowej</th>
+                    <td th:text="${firm.accidentDuesDate}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Ostatnia Zmiana</th>
+                    <td th:text="${firm.changeLog}">id</td>
                 </tr>
                 </tbody>
             </table>
