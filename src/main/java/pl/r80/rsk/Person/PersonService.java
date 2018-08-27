@@ -1,4 +1,4 @@
-package pl.r80.rsk;
+package pl.r80.rsk.Person;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

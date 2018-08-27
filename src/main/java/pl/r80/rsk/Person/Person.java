@@ -1,8 +1,9 @@
-package pl.r80.rsk;
+package pl.r80.rsk.Person;
 
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 
 @Data
@@ -31,6 +32,6 @@ public class Person {
     String nrTelefonu;
     String email;
     @Column(name = "log_zmian")
-    LocalDate logZmian;
+    Timestamp logZmian;
 
 }

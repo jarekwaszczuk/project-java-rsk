@@ -1,10 +1,10 @@
-package pl.r80.rsk;
+package pl.r80.rsk.Firm;
 
 import lombok.Data;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 @Entity
 @Data
@@ -43,7 +43,7 @@ public class Firm {
     LocalDate accidentDuesDate;
 
     @Column(name = "log_zmian")
-    LocalDate changeLog;
+    Timestamp changeLog;
 
 
 }

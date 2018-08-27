@@ -1,116 +1,11 @@
 <!DOCTYPE HTML>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Oprogramowanie wspomagające pracę z rachunkowością stowarzyszeń"/>
-    <meta name="keywords" content="rachunkowość, stowarzyszenie, lista płac, kadry, płace, plan kont"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="author" content="Jarosław P. Waszczuk"/>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<div th:replace="include/head :: head"/>
 
-    <title>RSK - Rachunkowość Stowarzyszeń Katarzyny</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.css">
-    <!--<link href="navbar-fixed-top.css" rel="stylesheet">-->
-    <!--<link rel="stylesheet" href="fontello/css/fontello.css" type="text/css"/>-->
-
-    <link href="https://fonts.googleapis.com/css?family=Bangers|Lato:400,400i,700,700i,900,900i|Lobster&amp;subset=latin-ext"
-          rel="stylesheet">
-
-</head>
 <body>
 
-
-<section>
-    <header>
-        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" href="/">RSK</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Kadry
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/employees">Kartoteki</a>
-                            <a class="dropdown-item" href="#">Nieobecności</a>
-                            <a class="dropdown-item" href="#">Kalendarz</a>
-                            <a class="dropdown-item" href="#">Zmiany</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Płace
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Naliczenie</a>
-                            <a class="dropdown-item" href="#">Listy płac</a>
-                            <a class="dropdown-item" href="#">Zestawienia</a>
-                            <a class="dropdown-item" href="#">Zmiany</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Księgowość
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Plan kont</a>
-                            <a class="dropdown-item" href="#">Księgowanie</a>
-                            <a class="dropdown-item" href="#">Przeglądy</a>
-                            <a class="dropdown-item" href="#">Zmiany</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Zestawienia
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Bilans</a>
-                            <a class="dropdown-item" href="#">Syntetyka</a>
-                            <a class="dropdown-item" href="#">Analityka</a>
-                            <a class="dropdown-item" href="#">Zmiany</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Administracja
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/persons">Dane osób</a>
-                            <a class="dropdown-item" href="/firms">Dane firm</a>
-                            <a class="dropdown-item" href="#">Użytkownicy</a>
-                            <a class="dropdown-item" href="#">Zmiany</a>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">WYLOGUJ</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <div>
-            <div class="jumbotron jumbotron-fluid">
-                <div class="container">
-                    <div class="display-4" id="tytul">RSK - Rachunkowość Stowarzyszeń Katarzyny</div>
-                    <div class="lead">Kontekst: <a class="link" href="#"></a></div>
-                    <!-- nawigacja -->
-                </div>
-            </div>
-        </div>
-    </header>
-</section>
+<div th:replace="include/menu :: menu"/>
 
 <section>
     <article>
@@ -156,19 +51,8 @@
         </div>
     </article>
 </section>
-<br><br>
-<section>
 
-    <nav class="navbar fixed-bottom navbar-light bg-light">
-        <footer>
-            <div>2018 &copy; Wszelkie prawa zastrzeżone.
-                <a class="link" href="mailto:jarekwaszczuk@poczta.fm">Jarosław P. Waszczuk</a>
-            </div>
-        </footer>
-    </nav>
-</section>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.js"></script>
+<div th:replace="include/footer :: footer"/>
+
 </body>
 </html>
