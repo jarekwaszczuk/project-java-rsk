@@ -67,6 +67,19 @@
                     <th scope="row">Ostatnia Zmiana</th>
                     <td th:text="${firm.changeLog}">id</td>
                 </tr>
+                <tr>
+                    <th scope="row">Akcja</th>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Akcje">
+                            <a href="/firms/update" th:attr="href=@{'/firms/update/'+${firm.id}}">
+                                <button type="button" class="btn btn-primary">Edycja</button>
+                            </a>
+                            <a href="/firms/update" th:href="@{'/firms/delete/'+${firm.id}}">
+                                <button type="button" class="btn btn-danger">Usuń</button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
                 </tbody>
             </table>
 
