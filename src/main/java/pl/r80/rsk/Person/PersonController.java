@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -28,6 +29,7 @@ public class PersonController {
         model.addAttribute("persons", personIterable);
         return "osoby";
     }
+
     @GetMapping("/readone/{id}")
     public String readOneById(@PathVariable Integer id, Model model) {
         Optional<Person> person = personService.findById(id);
@@ -39,4 +41,38 @@ public class PersonController {
         return "osoby_read";
     }
 
+    @GetMapping("/update/{id}")
+    public String updatePerson(@PathVariable Integer id, Model model) {
+        Optional<Person> person = personService.findById(id);
+        if (person.isPresent()) {
+            model.addAttribute("person", person.get());
+        } else {
+            throw new IllegalPersonException("No such person");
+        }
+        return "osoby_update";
+    }
+
+
+    @GetMapping("/delete/{id}")
+    public String deletePerson(@PathVariable Integer id, Model model) {
+        Optional<Person> person = personService.findById(id);
+        if (person.isPresent()) {
+            model.addAttribute("person", person.get());
+        } else {
+            throw new IllegalPersonException("No such person");
+        }
+        return "osoby_delete";
+    }
+
+    //todo
+    @PostMapping("/update/")
+    public void update(){
+
+    }
+
+    //todo
+    @PostMapping("/delete/")
+    public void delete(){
+
+    }
 }
