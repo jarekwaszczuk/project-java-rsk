@@ -32,6 +32,6 @@ public class Person {
     String nrTelefonu;
     String email;
     @Column(name = "log_zmian")
-    Timestamp logZmian;
+    Timestamp changeLog;
 
 }
