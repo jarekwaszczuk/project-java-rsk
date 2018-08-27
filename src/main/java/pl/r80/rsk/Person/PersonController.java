@@ -65,13 +65,19 @@ public class PersonController {
     }
 
     //todo
-    @PostMapping("/update/")
+    @PostMapping("/add")
+    public void add(){
+
+    }
+
+    //todo
+    @PostMapping("/update")
     public void update(){
 
     }
 
     //todo
-    @PostMapping("/delete/")
+    @PostMapping("/delete")
     public void delete(){
 
     }
