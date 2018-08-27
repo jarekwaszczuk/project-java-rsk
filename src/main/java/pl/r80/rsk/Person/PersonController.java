@@ -3,10 +3,7 @@ package pl.r80.rsk.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -64,21 +61,26 @@ public class PersonController {
         return "osoby_delete";
     }
 
+    @GetMapping("/add")
+    public String addPerson(@ModelAttribute Person person, Model model) {
+        return "osoby_add";
+    }
+
     //todo
     @PostMapping("/add")
-    public void add(){
+    public void add(@ModelAttribute Person person, Model model){
 
     }
 
     //todo
     @PostMapping("/update")
-    public void update(){
+    public void update(@ModelAttribute Person person, Model model){
 
     }
 
     //todo
     @PostMapping("/delete")
-    public void delete(){
+    public void delete(@ModelAttribute Person person, Model model){
 
     }
 }
