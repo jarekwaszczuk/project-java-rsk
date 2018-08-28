@@ -2,6 +2,7 @@ package pl.r80.rsk.Firm;
 
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,4 +21,11 @@ public class FirmService {
     public Optional<Firm> findById(Integer id) {
         return firmRepository.findById(id);
     }
+
+    public void save(Firm firm) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        firm.setChangeLog(timestamp);
+        firmRepository.save(firm);
+    }
+
 }

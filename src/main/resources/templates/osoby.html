@@ -25,19 +25,17 @@
                     </th>
                     <th scope="col">Pesel
                     </th>
+                    <th scope="col">Kod Pocztowy
+                    </th>
+                    <th scope="col">Poczta
+                    </th>
+                    <th scope="col">Miejscowość
+                    </th>
                     <th scope="col">Ulica
                     </th>
                     <th scope="col">Nr Domu
                     </th>
                     <th scope="col">Nr Lokalu
-                    </th>
-                    <th scope="col">Kod Pocztowy
-                    </th>
-                    <th scope="col">Miejscowość
-                    </th>
-                    <th scope="col">Nr Telefonu
-                    </th>
-                    <th scope="col">E-mail
                     </th>
                     <th scope="col">Akcja</th>
                 </tr>
@@ -49,13 +47,12 @@
                     <td th:text="${person.drugieImie}">id</td>
                     <td th:text="${person.nazwisko}">id</td>
                     <td th:text="${person.pesel}">id</td>
+                    <td th:text="${person.kodPocztowy}">id</td>
+                    <td th:text="${person.poczta}">id</td>
+                    <td th:text="${person.miejscowosc}">id</td>
                     <td th:text="${person.ulica}">id</td>
                     <td th:text="${person.nrDomu}">id</td>
                     <td th:text="${person.nrLokalu}">id</td>
-                    <td th:text="${person.kodPocztowy}">id</td>
-                    <td th:text="${person.miejscowosc}">id</td>
-                    <td th:text="${person.nrTelefonu}">id</td>
-                    <td th:text="${person.email}">id</td>
                     <td>
                         <div class="btn-group" role="group" aria-label="Akcje">
                             <a href="/persons/readone" th:href="@{'/persons/readone/'+${person.id}}">
