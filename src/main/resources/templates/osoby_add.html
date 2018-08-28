@@ -51,7 +51,9 @@
                     <div class="form-group col">
                         <label for="inputNrDomu">Nr domu</label>
                         <input type="text" class="form-control" id="inputNrDomu" name="nrDomu" th:field="*{nrDomu}"
-                               placeholder="Wpisz nr domu...">
+                               placeholder="Wpisz nr domu..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                     <div class="form-group col">
                         <label for="inputNrLokalu">Nr lokalu</label>
@@ -65,19 +67,25 @@
                         <label for="inputKodPocztowy">Kod Pocztowy</label>
                         <input type="text" class="form-control" id="inputKodPocztowy" name="kodPocztowy"
                                th:field="*{kodPocztowy}"
-                               placeholder="Wpisz kod pocztowy...">
+                               placeholder="Wpisz kod pocztowy..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                     <div class="form-group col">
                         <label for="inputPoczta">Poczta</label>
                         <input type="text" class="form-control" id="inputPoczta" name="poczta"
                                th:field="*{poczta}"
-                               placeholder="Wpisz pocztę...">
+                               placeholder="Wpisz pocztę..."> required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                     <div class="form-group col">
                         <label for="inputMiejscowosc">Miejscowość</label>
                         <input type="text" class="form-control" id="inputMiejscowosc" name="miejscowosc"
                                th:field="*{miejscowosc}"
-                               placeholder="Wpisz miejscowość...">
+                               placeholder="Wpisz miejscowość..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                 </div>
                 <div class="row">
@@ -95,9 +103,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary">ZAPISZ</button>
             </form>
-            <ul>
-                <li th:each="err : ${#fields.errors('*')}" th:text="${err}"/>
-            </ul>
         </div>
     </article>
 </section>
