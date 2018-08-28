@@ -10,24 +10,29 @@
 <section>
     <article>
         <div class="container">
-            <form action="/firms/add" th:object="${firm}" method="post">
+            <form action="/firms/add" th:object="${firm}" method="post" class="needs-validation" novalidate>
+                <div th:each="err : ${#fields.detailedErrors('*')}" th:text=" ${err}" class="error"/>
                 <div class="row">
                     <div class="form-group col">
-                        <label for="inputPelnaNazwa">Pełna nazwa</label>
-                        <input type="text" class="form-control" id="inputPelnaNazwa" th:field="*{fullName}"
-                               placeholder="Wpisz pełną nazwę...">
+                        <label for="validationCustom01">Pełna nazwa</label>
+                        <input type="text" class="form-control" id="validationCustom01" th:field="*{fullName}"
+                               placeholder="Wpisz pełną nazwę..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd!</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col">
                         <label for="inputNazwa">Krótka nazwa</label>
                         <input type="text" class="form-control" id="inputNazwa" th:field="*{name}"
-                               placeholder="Wpisz krótką nazwę...">
+                               placeholder="Wpisz krótką nazwę..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd!</div>
                     </div>
                     <div class="form-group col">
                         <label for="inputNip">NIP</label>
                         <input type="text" class="form-control" id="inputNip" th:field="*{nip}"
-                               placeholder="Wpisz NIP...">
+                               placeholder="Wpisz NIP..." required>
                     </div>
                     <div class="form-group col">
                         <label for="inputRegon">REGON</label>
@@ -78,6 +83,25 @@
 </section>
 
 <div th:replace="include/footer :: footer"/>
-
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 </body>
 </html>

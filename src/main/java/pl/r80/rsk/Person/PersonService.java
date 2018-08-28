@@ -3,6 +3,7 @@ package pl.r80.rsk.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,5 +23,11 @@ public class PersonService {
 
     public Optional<Person> findById(Integer id) {
         return personRepository.findById(id);
+    }
+
+    public void save(Person person) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        person.setChangeLog(timestamp);
+        personRepository.save(person);
     }
 }

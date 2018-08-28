@@ -3,8 +3,10 @@ package pl.r80.rsk.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +20,6 @@ public class PersonController {
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
-
     @GetMapping
     public String findAll(Model model) {
 
@@ -49,7 +50,6 @@ public class PersonController {
         return "osoby_update";
     }
 
-
     @GetMapping("/delete/{id}")
     public String deletePerson(@PathVariable Integer id, Model model) {
         Optional<Person> person = personService.findById(id);
@@ -68,19 +68,23 @@ public class PersonController {
 
     //todo
     @PostMapping("/add")
-    public void add(@ModelAttribute Person person, Model model){
-
+    public String add(@Valid @ModelAttribute Person person, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()) {
+            return "osoby_add";
+        }
+        personService.save(person);
+        return "index";
     }
 
     //todo
     @PostMapping("/update")
-    public void update(@ModelAttribute Person person, Model model){
+    public void update(@Valid Person person, BindingResult bindingResult, Model model){
 
     }
 
     //todo
-    @PostMapping("/delete")
-    public void delete(@ModelAttribute Person person, Model model){
-
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id, Model model){
+        return "index";
     }
 }
