@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -17,7 +18,7 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
 
-    @NotEmpty
+    @NotEmpty(message = "Imię nie może być puste")
     String imie;
     @Column(name = "drugie_imie")
     String drugieImie;
@@ -30,12 +31,12 @@ public class Person implements Serializable {
     String nrDomu;
     @Column(name = "nr_lokalu")
     String nrLokalu;
-    @NotEmpty
+    @NotEmpty(message = "Kod pocztowy nie może być pusty")
     @Column(name = "kod_pocztowy")
     String kodPocztowy;
-    @NotEmpty
+    @NotEmpty(message = "Miejscowość nie może być pusta")
     String miejscowosc;
-    @NotEmpty
+    @NotEmpty(message = "Poczgta nie może być pusta")
     String poczta;
     @Column(name = "nr_telefonu")
     String nrTelefonu;

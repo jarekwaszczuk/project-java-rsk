@@ -18,34 +18,34 @@ public class Firm implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
 
-    @NotEmpty
-    @Size(min=3, max=30)
+    @NotEmpty(message = "Nazwa nie może być pusta")
+    @Size(message = "Musi mieć odpowiednią długość", min = 3, max = 30)
     @Column(name = "nazwa")
     String name;
 
-    @NotEmpty
-    @Size(min=3, max=30)
+    @NotEmpty(message = "Pełna nazwa nie może być pusta")
+    @Size(message = "Musi mieć odpowiednią długość"min= 5, max = 30)
     @Column(name = "pelna_nazwa")
     String fullName;
 
-    @NotEmpty
+    @NotEmpty(message = "NIP nie może być pusty")
     String nip;
-    @NotEmpty
+    @NotEmpty(message = "Regon nie może być pusty")
     String regon;
 
-    @NotEmpty
+    @NotEmpty(message = "Ulica nie może być pusta")
     @Column(name = "ulica")
     String street;
 
-    @NotEmpty
+    @NotEmpty(message = "Nr lokalu nie może być pusty")
     @Column(name = "nr_lokalu")
     String placeNumber;
 
-    @NotEmpty
+    @NotEmpty(message = "Kod pocztowy nie może być pusty")
     @Column(name = "kod_pocztowy")
     String postalCode;
 
-    @NotEmpty
+    @NotEmpty(message = "Poczta nie może być pusta")
     @Column(name = "poczta")
     String post;
 
