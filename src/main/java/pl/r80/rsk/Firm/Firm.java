@@ -49,6 +49,10 @@ public class Firm implements Serializable {
     @Column(name = "poczta")
     String post;
 
+    @NotEmpty(message = "Miejscowość nie może być pusta")
+    @Column(name = "miejscowosc")
+    String city;
+
     @Column(name = "skladka_wypadkowa")
     Double accidentDues;
 

@@ -30,6 +30,7 @@ public class FirmController implements WebMvcConfigurer {
         registry.addViewController("/stowarzyszenia").setViewName("stowarzyszenia");
         registry.addViewController("/stowarzyszenie_add").setViewName("stowarzyszenie_add");
         registry.addViewController("/stowarzyszenie_update").setViewName("stowarzyszenie_update");
+        registry.addViewController("/stowarzyszenie_delete").setViewName("stowarzyszenie_delete");
     }
 
     @GetMapping
@@ -77,7 +78,6 @@ public class FirmController implements WebMvcConfigurer {
         return "stowarzyszenie_add";
     }
 
-    //todo
     @PostMapping("/add")
     public String add(@ModelAttribute @Valid Firm firm, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
@@ -89,8 +89,16 @@ public class FirmController implements WebMvcConfigurer {
             firmService.save(firm);
             return "stowarzyszenie_read";
         }
+//            String[] split = firm.accidentDuesDate.toString().split(".");
+//            Integer day = Integer.valueOf(split[0]);
+//            Integer month = Integer.valueOf(split[1]);
+//            Integer year = Integer.valueOf(split[2]);
+//            LocalDate convertDate = LocalDate.of(year,month,day);
+        Double accidental = Double.valueOf(firm.accidentDues);
+        firm.setAccidentDues(accidental);
+//            firm.setAccidentDuesDate(convertDate);
         firmService.save(firm);
-        return "redirect:/stowarzyszenie_read";
+        return "stowarzyszenie_read";
     }
 
     //todo
