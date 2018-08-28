@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="include/head :: head"/>
+
+<body>
+
+<div th:replace="include/menu :: menu"/>
+
+<section>
+    <article>
+        <div class="container">
+            <form action="#" th:action="@{/persons/update}" th:object="${person}" method="post">
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="inputImie">Imię</label>
+                        <input type="text" class="form-control" id="inputImie" name="imie" th:field="*{imie}"
+                               placeholder="Wpisz imię...">
+                    </div>
+                    <div class="form-group col">
+                        <label for="inputDrugieImie">Drugie Imię</label>
+                        <input type="text" class="form-control" id="inputDrugieImie" name="drugieImie" th:field="*{drugieImie}"
+                               placeholder="Wpisz drugie imię...">
+                    </div>
+                    <div class="form-group col">
+                        <label for="inputNazwisko">Nazwisko</label>
+                        <input type="text" class="form-control" id="inputNazwisko" name="nazwisko" th:field="*{nazwisko}"
+                               placeholder="Wpisz nazwisko...">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPesel">PESEL</label>
+                    <input type="text" class="form-control" id="inputPesel" name="pesel"  th:field="*{pesel}" placeholder="Wpisz pesel...">
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="inputUlica">Ulica</label>
+                        <input type="text" class="form-control" id="inputUlica" name="ulica" th:field="*{ulica}"
+                               placeholder="Wpisz ulicę...">
+                    </div>
+                    <div class="form-group col">
+                        <label for="inputNrDomu">Nr domu</label>
+                        <input type="text" class="form-control" id="inputNrDomu" name="nrDomu" th:field="*{nrDomu}"
+                               placeholder="Wpisz nr domu...">
+                    </div>
+                    <div class="form-group col">
+                        <label for="inputNrLokalu">Nr lokalu</label>
+                        <input type="text" class="form-control" id="inputNrLokalu" name="nrLokalu" th:field="*{nrLokalu}"
+                               placeholder="Wpisz nr lokalu...">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="inputKodPocztowy">Kod Pocztowy</label>
+                        <input type="text" class="form-control" id="inputKodPocztowy" name="kodPocztowy" th:field="*{kodPocztowy}"
+                               placeholder="Wpisz kod pocztowy...">
+                    </div>
+                    <div class="form-group col">
+                        <label for="inputMiejscowosc">Miejscowość</label>
+                        <input type="text" class="form-control" id="inputMiejscowosc" name="miejscowosc" th:field="*{miejscowosc}"
+                               placeholder="Wpisz miejscowość...">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="inputNrTelefonu">Nr telefonu</label>
+                        <input type="text" class="form-control" id="inputNrTelefonu" name="nrTelefonu" th:field="*{nrTelefonu}"
+                               placeholder="Wpisz nr telefonu...">
+                    </div>
+                    <div class="form-group col">
+                        <label for="inputEmail">E-mail</label>
+                        <input type="email" class="form-control" id="inputEmail" name="email" th:field="*{email}"
+                               placeholder="Wpisz email...">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">ZAPISZ</button>
+            </form>
+        </div>
+    </article>
+</section>
+
+<div th:replace="include/footer :: footer"/>
+
+</body>
+</html>

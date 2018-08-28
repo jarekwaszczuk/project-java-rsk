@@ -1,4 +1,4 @@
-package pl.r80.rsk;
+package pl.r80.rsk.Firm;
 
 public class IllegalFirmException extends RuntimeException{
 
