@@ -3,6 +3,7 @@ package pl.r80.rsk.Person;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.sql.Timestamp;
@@ -20,8 +21,9 @@ public class Person implements Serializable {
     String imie;
     @Column(name = "drugie_imie")
     String drugieImie;
-    @NotEmpty
+    @NotEmpty(message = "Nazwisko nie może być puste")
     String nazwisko;
+    @Digits(message = "Musi zawierać 11 cyfr", integer = 11, fraction = 0)
     String pesel;
     String ulica;
     @Column(name = "nr_domu")

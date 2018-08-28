@@ -18,7 +18,7 @@
                         <input type="text" class="form-control" id="validationCustom01" th:field="*{fullName}"
                                placeholder="Wpisz pełną nazwę..." required>
                         <div class="valid-feedback">OK!</div>
-                        <div class="invalid-feedback">Błąd!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                 </div>
                 <div class="row">
@@ -27,17 +27,21 @@
                         <input type="text" class="form-control" id="inputNazwa" th:field="*{name}"
                                placeholder="Wpisz krótką nazwę..." required>
                         <div class="valid-feedback">OK!</div>
-                        <div class="invalid-feedback">Błąd!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                     <div class="form-group col">
                         <label for="inputNip">NIP</label>
                         <input type="text" class="form-control" id="inputNip" th:field="*{nip}"
                                placeholder="Wpisz NIP..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                     <div class="form-group col">
                         <label for="inputRegon">REGON</label>
                         <input type="text" class="form-control" id="inputRegon" th:field="*{regon}"
-                               placeholder="Wpisz REGON...">
+                               placeholder="Wpisz REGON..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                 </div>
                 <div class="row">
@@ -49,19 +53,25 @@
                     <div class="form-group col">
                         <label for="inputNrLokalu">Nr lokalu</label>
                         <input type="text" class="form-control" id="inputNrLokalu" th:field="*{placeNumber}"
-                               placeholder="Wpisz nr lokalu...">
+                               placeholder="Wpisz nr lokalu..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="form-group col">
                         <label for="inputKodPocztowy">Kod Pocztowy</label>
                         <input type="text" class="form-control" id="inputKodPocztowy" th:field="*{postalCode}"
-                               placeholder="Wpisz kod pocztowy...">
+                               placeholder="Wpisz kod pocztowy..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                     <div class="form-group col">
                         <label for="inputMiejscowosc">Miejscowość</label>
                         <input type="text" class="form-control" id="inputMiejscowosc" th:field="*{post}"
-                               placeholder="Wpisz miejscowość...">
+                               placeholder="Wpisz miejscowość..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                 </div>
                 <div class="row">
