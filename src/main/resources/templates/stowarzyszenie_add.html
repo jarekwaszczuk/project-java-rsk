@@ -83,13 +83,13 @@
                 </div>
                 <div class="row">
                     <div class="form-group col">
-                        <label for="inputSkladkaWypadkowa">Składka wypadkowa</label>
+                        <label for="inputSkladkaWypadkowa">Składka wypadkowa (format: 0.00)</label>
                         <input type="text" class="form-control" id="inputSkladkaWypadkowa" th:field="*{accidentDues}"
                                placeholder="Wpisz wartość składki wypadkowej...">
                     </div>
                     <div class="form-group col">
-                        <label for="inputSkladkaWypadkowaData">Data obowiązywania składki wypadkowej</label>
-                        <input type="date" class="form-control" id="inputSkladkaWypadkowaData" th:field="*{accidentDuesDate}"
+                        <label for="inputSkladkaWypadkowaData">Data obowiązywania składki wypadkowej (format: DD.MM.YY)</label>
+                        <input type="text" class="form-control" id="inputSkladkaWypadkowaData" th:field="*{accidentDuesDate}"
                                placeholder="Wpisz datę obowiązywania składki wypadkowej...">
                     </div>
                 </div>
