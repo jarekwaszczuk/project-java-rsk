@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="form-group col">
                         <label for="inputImieiNazwisko">Imię i Nazwisko</label>
-                        <select class="custom-select" id="inputImieiNazwisko" name="person">
+                        <select class="custom-select" id="inputImieiNazwisko" name="personId">
                             <span th:each="person :${persons}">
                                 <option value="#" th:value="${person.id}" th:text="${person.imie}+' '+${person.nazwisko}">osoba</option>
                             </span>
@@ -34,7 +34,7 @@
                 <div class="row">
                     <div class="form-group col">
                         <label for="inputStowarzyszenie">Nazwa stowarzyszenia</label>
-                        <select class="custom-select" id="inputStowarzyszenie" name="firm">
+                        <select class="custom-select" id="inputStowarzyszenie" name="firmId">
                             <span th:each="firm :${firms}">
                                 <option value="#" th:value="${firm.id}" th:text="${firm.fullName}">firma</option>
                             </span>
@@ -44,8 +44,8 @@
                 <div class="row">
                     <div class="form-group col-md-4 mb-3">
                         <label for="inputDataZatrudnienia">Data zatrudnienia (format: MM.DD.RR)</label>
-                        <input type="text" class="form-control" id="inputDataZatrudnienia" th:field="*{hireDate}"
-                               placeholder="Wpisz wynagrodzenie..." required>
+                        <input type="date" class="form-control" id="inputDataZatrudnienia" name="hireDate"
+                               placeholder="Wpisz datę zatrudnienia..." required> <!-- th:field="*{hireDate}"-->
                         <div class="valid-feedback">OK!</div>
                         <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>

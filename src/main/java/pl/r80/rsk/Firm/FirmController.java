@@ -89,14 +89,10 @@ public class FirmController implements WebMvcConfigurer {
             firmService.save(firm);
             return "stowarzyszenie_read";
         }
-//            String[] split = firm.accidentDuesDate.toString().split(".");
-//            Integer day = Integer.valueOf(split[0]);
-//            Integer month = Integer.valueOf(split[1]);
-//            Integer year = Integer.valueOf(split[2]);
-//            LocalDate convertDate = LocalDate.of(year,month,day);
+
         Double accidental = Double.valueOf(firm.accidentDues);
         firm.setAccidentDues(accidental);
-//            firm.setAccidentDuesDate(convertDate);
+
         firmService.save(firm);
         return "stowarzyszenie_read";
     }

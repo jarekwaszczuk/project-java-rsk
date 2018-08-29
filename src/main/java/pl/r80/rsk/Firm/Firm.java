@@ -3,6 +3,7 @@ package pl.r80.rsk.Firm;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.r80.rsk.Employment.Employment;
 
 import javax.persistence.*;
@@ -60,6 +61,7 @@ public class Firm implements Serializable {
     @Column(name = "skladka_wypadkowa")
     Double accidentDues;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_skladki_wypadkowej")
     LocalDate accidentDuesDate;
 
