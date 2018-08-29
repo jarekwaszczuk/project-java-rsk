@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="include/head :: head"/>
+
+<body>
+
+<div th:replace="include/menu :: menu"/>
+
+<section>
+    <article>
+        <div class="container">
+            <div th:each="err : ${#fields.detailedErrors('*')}" th:text=" ${err}" class="error"/>
+            <form action="#" th:action="@{/employments/add}" th:object="${employment}" method="post"
+                  class="needs-validation" novalidate>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="inputImieiNazwisko">Imię i Nazwisko</label>
+                        <select class="custom-select" id="inputImieiNazwisko" name="person">
+                            <span th:each="person :${persons}">
+                                <option value="#" th:value="${person.id}" th:text="${person.imie}+' '+${person.nazwisko}">osoba</option>
+                            </span>
+                        </select>
+                    </div>
+                    <div class="form-group col">
+                        <label for="inputTypUmowy">Typ umowy</label>
+                        <select class="custom-select" id="inputTypUmowy" name="agreementType">
+                            <span th:each="agreementType :${agreementTypes}">
+                                <option value="#" th:value="${agreementType}" th:text="${agreementType.description}">umowa</option>
+                            </span>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col">
+                        <label for="inputStowarzyszenie">Nazwa stowarzyszenia</label>
+                        <select class="custom-select" id="inputStowarzyszenie" name="firm">
+                            <span th:each="firm :${firms}">
+                                <option value="#" th:value="${firm.id}" th:text="${firm.fullName}">firma</option>
+                            </span>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="inputDataZatrudnienia">Data zatrudnienia (format: MM.DD.RR)</label>
+                        <input type="text" class="form-control" id="inputDataZatrudnienia" th:field="*{hireDate}"
+                               placeholder="Wpisz wynagrodzenie..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="inputWynagrodzenie">Wynagrodzenie (format: 0000.00)</label>
+                        <input type="text" class="form-control" id="inputWynagrodzenie" th:field="*{salary}"
+                               placeholder="Wpisz wynagrodzenie..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="inputDataZakonczeniaUmowy">Data zakończenia umowy (format: MM.DD.RR)</label>
+                        <input type="text" class="form-control" id="inputDataZakonczeniaUmowy" th:field="*{hireEndDate}"
+                               placeholder="Wpisz date zakończenia umowy...">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">ZAPISZ</button>
+            </form>
+        </div>
+    </article>
+</section>
+
+<div th:replace="include/footer :: footer"/>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict';
+        window.addEventListener('load', function () {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+</body>
+</html>

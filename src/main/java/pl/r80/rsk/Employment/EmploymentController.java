@@ -4,10 +4,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import pl.r80.rsk.Firm.Firm;
+import pl.r80.rsk.Firm.FirmRepository;
+import pl.r80.rsk.Person.Person;
+import pl.r80.rsk.Person.PersonRepository;
+import pl.r80.rsk.Person.PersonService;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,16 +23,24 @@ import java.util.Optional;
 public class EmploymentController implements WebMvcConfigurer {
 
     public final EmploymentService employmentService;
+    public final PersonRepository personRepository;
+    public final FirmRepository firmRepository;
 
     @Autowired
-    public EmploymentController(EmploymentService employmentService) {
+    public EmploymentController(EmploymentService employmentService, PersonRepository personRepository, FirmRepository firmRepository) {
         this.employmentService = employmentService;
+        this.personRepository = personRepository;
+        this.firmRepository = firmRepository;
     }
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/zatrudnienie").setViewName("zatrudnienie");
+        registry.addViewController("/zatrudnienie_read").setViewName("zatrudnienie_read");
+        registry.addViewController("/zatrudnienie_update").setViewName("zatrudnienie_update");
+        registry.addViewController("/zatrudnienie_delete").setViewName("zatrudnienie_delete");
+        registry.addViewController("/zatrudnienie_add").setViewName("zatrudnienie_add");
     }
 
     @GetMapping
@@ -68,6 +82,17 @@ public class EmploymentController implements WebMvcConfigurer {
             throw new IllegalEmploymentException("No such employment");
         }
         return "zatrudnienie_delete";
+    }
+
+    @GetMapping("/add")
+    public String addEmployment(@ModelAttribute Employment employment, Model model) {
+        Iterable<Person> persons = personRepository.findAll();
+        Iterable<Firm> firms = firmRepository.findAll();
+        AgreementType[] agreementTypes = AgreementType.values();
+        model.addAttribute("agreementTypes", agreementTypes);
+        model.addAttribute("persons", persons);
+        model.addAttribute("firms", firms);
+        return "zatrudnienie_add";
     }
 
 }
