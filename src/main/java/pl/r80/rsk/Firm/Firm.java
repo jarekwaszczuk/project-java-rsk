@@ -28,7 +28,7 @@ public class Firm implements Serializable {
     String name;
 
     @NotEmpty(message = "Pełna nazwa nie może być pusta")
-    @Size(message = "Musi mieć odpowiednią długość", min = 5, max = 30)
+    @Size(message = "Musi mieć odpowiednią długość", min = 5, max = 100)
     @Column(name = "pelna_nazwa")
     String fullName;
 
