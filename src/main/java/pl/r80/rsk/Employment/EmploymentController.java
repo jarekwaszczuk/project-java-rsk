@@ -48,4 +48,26 @@ public class EmploymentController implements WebMvcConfigurer {
         return "zatrudnienie_read";
     }
 
+    @GetMapping("/update/{id}")
+    public String updateEmployment(@PathVariable Integer id, Model model) {
+        Optional<Employment> employment = employmentService.findById(id);
+        if (employment.isPresent()) {
+            model.addAttribute("employment", employment.get());
+        } else {
+            throw new IllegalEmploymentException("No such employment");
+        }
+        return "zatrudnienie_update";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deleteEmployment(@PathVariable Integer id, Model model) {
+        Optional<Employment> firm = employmentService.findById(id);
+        if (firm.isPresent()) {
+            model.addAttribute("firm", firm.get());
+        } else {
+            throw new IllegalEmploymentException("No such employment");
+        }
+        return "zatrudnienie_delete";
+    }
+
 }
