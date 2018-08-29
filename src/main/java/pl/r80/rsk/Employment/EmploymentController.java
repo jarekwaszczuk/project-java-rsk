@@ -98,6 +98,11 @@ public class EmploymentController implements WebMvcConfigurer {
     @PostMapping("/add")
     public String add(@RequestParam Integer personId, @RequestParam AgreementType agreementType, @RequestParam Integer firmId, @RequestParam String hireDate,
                       @ModelAttribute @Valid Employment employment, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            return "zatrudnienie_add";
+        }
+
         Optional<Person> personDB = personRepository.findById(personId);
         Person person = personDB.get();
         Optional<Firm> firmDB = firmRepository.findById(firmId);
@@ -108,10 +113,6 @@ public class EmploymentController implements WebMvcConfigurer {
         employment.setAgreementType(agreementType);
 
         employmentService.save(employment);
-
-//        if (bindingResult.hasErrors()) {
-//            return "zatrudnienie_add";
-//        }
 
         return "zatrudnienie_read";
     }
