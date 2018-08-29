@@ -53,51 +53,42 @@ public class EmploymentController implements WebMvcConfigurer {
 
     @GetMapping("/readone/{id}")
     public String readOneById(@PathVariable Integer id, Model model) {
-        Optional<Employment> employment = employmentService.findById(id);
-        if (employment.isPresent()) {
-            model.addAttribute("employment", employment.get());
-        } else {
-            throw new IllegalEmploymentException("No such employment");
-        }
+        verifyEmploymentExist(id, model);
         return "zatrudnienie_read";
     }
 
     @GetMapping("/update/{id}")
     public String updateEmployment(@PathVariable Integer id, Model model) {
-        Optional<Employment> employment = employmentService.findById(id);
-        if (employment.isPresent()) {
-            model.addAttribute("employment", employment.get());
-        } else {
-            throw new IllegalEmploymentException("No such employment");
-        }
+        verifyEmploymentExist(id, model);
         return "zatrudnienie_update";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteEmployment(@PathVariable Integer id, Model model) {
-        Optional<Employment> firm = employmentService.findById(id);
-        if (firm.isPresent()) {
-            model.addAttribute("firm", firm.get());
-        } else {
-            throw new IllegalEmploymentException("No such employment");
-        }
+        verifyEmploymentExist(id, model);
         return "zatrudnienie_delete";
     }
 
     @GetMapping("/add")
     public String addEmployment(@ModelAttribute Employment employment, Model model) {
-        Iterable<Person> persons = personRepository.findAll();
-        Iterable<Firm> firms = firmRepository.findAll();
-        AgreementType[] agreementTypes = AgreementType.values();
-        model.addAttribute("agreementTypes", agreementTypes);
-        model.addAttribute("persons", persons);
-        model.addAttribute("firms", firms);
+        addDataPrepare(model);
         return "zatrudnienie_add";
     }
 
     @PostMapping("/add")
     public String add(@RequestParam Integer personId, @RequestParam AgreementType agreementType, @RequestParam Integer firmId, @RequestParam String hireDate,
                       @ModelAttribute @Valid Employment employment, BindingResult bindingResult, Model model) {
+
+        if (bindingResult.hasErrors()) {
+            addDataPrepare(model);
+            model.addAttribute("personId", personId);
+            model.addAttribute("firmId", firmId);
+            model.addAttribute("agreementType", agreementType);
+            //TODO
+            //z przekazywanych wartośći powyżej zaznaczyć odpowiednie optiony przez selected
+            return "zatrudnienie_add";
+        }
+
         Optional<Person> personDB = personRepository.findById(personId);
         Person person = personDB.get();
         Optional<Firm> firmDB = firmRepository.findById(firmId);
@@ -109,10 +100,24 @@ public class EmploymentController implements WebMvcConfigurer {
 
         employmentService.save(employment);
 
-//        if (bindingResult.hasErrors()) {
-//            return "zatrudnienie_add";
-//        }
-
         return "zatrudnienie_read";
+    }
+
+    private void addDataPrepare(Model model) {
+        Iterable<Person> persons = personRepository.findAll();
+        Iterable<Firm> firms = firmRepository.findAll();
+        AgreementType[] agreementTypes = AgreementType.values();
+        model.addAttribute("agreementTypes", agreementTypes);
+        model.addAttribute("persons", persons);
+        model.addAttribute("firms", firms);
+    }
+
+    private void verifyEmploymentExist(@PathVariable Integer id, Model model) {
+        Optional<Employment> employment = employmentService.findById(id);
+        if (employment.isPresent()) {
+            model.addAttribute("employment", employment.get());
+        } else {
+            throw new IllegalEmploymentException("No such employment");
+        }
     }
 }
