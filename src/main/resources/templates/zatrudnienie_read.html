@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="include/head :: head"/>
+
+<body>
+
+<div th:replace="include/menu2 :: menu"/>
+
+<section>
+    <article>
+        <div class="container">
+            <table class="table table-striped"> <!--table-bordered-->
+                <thead>
+                <tr>
+                    <th scope="col">Właściwość</th>
+                    <th scope="col">Wartość</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Id</th>
+                    <td th:text="${employment.id}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Imię i nazwisko</th>
+                    <td th:text="${employment.person.imie}+' '+${employment.person.nazwisko}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Firma</th>
+                    <td th:text="${employment.firm.fullName}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Typ umowy</th>
+                    <td th:text="${employment.agreementType.description}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Data zatrudnienia</th>
+                    <td th:text="${employment.hireDate}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Wynagrodzenie</th>
+                    <td th:text="${employment.salary}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Data zakończenia zatrudnienia</th>
+                    <td th:text="${employment.hireEndDate}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Ostatnia Zmiana</th>
+                    <td th:text="${employment.changeLog}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Akcja</th>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Akcje">
+                            <a href="/employments/update" th:attr="href=@{'/employments/update/'+${employment.id}}">
+                                <button type="button" class="btn btn-primary">Edycja</button>
+                            </a>
+                            <a href="/employments/update" th:href="@{'/employments/delete/'+${employment.id}}" class="delete"
+                               data-confirm="Czy jesteś pewny, że chcesz usunąć tą pozycję?">
+                                <button type="button" class="btn btn-danger">Usuń</button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+</section>
+
+<div th:replace="include/footer :: footer"/>
+<script>
+    $('.delete').on("click", function (e) {
+        e.preventDefault();
+
+        var choice = confirm($(this).attr('data-confirm'));
+
+        if (choice) {
+            window.location.href = $(this).attr('href');
+        }
+    });
+</script>
+</body>
+</html>

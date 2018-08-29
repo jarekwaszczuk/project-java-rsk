@@ -3,6 +3,7 @@ package pl.r80.rsk.Employment;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmploymentService {
@@ -15,5 +16,9 @@ public class EmploymentService {
 
     public List<Employment> findAll() {
         return (List<Employment>) employmentRepository.findAll();
+    }
+
+    public Optional<Employment> findById(Integer id) {
+        return employmentRepository.findById(id);
     }
 }
