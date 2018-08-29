@@ -35,9 +35,9 @@
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4 mb-3">
-                        <label for="inputDataZatrudnienia">Data zatrudnienia (format: MM.DD.RR)</label>
-                        <input type="text" class="form-control" id="inputDataZatrudnienia" th:field="*{hireDate}"
-                               placeholder="Wpisz wynagrodzenie..." required>
+                        <label for="inputDataZatrudnienia">Data zatrudnienia</label>
+                        <input type="date" class="form-control" id="inputDataZatrudnienia" th:field="*{hireDate}"
+                               placeholder="Wpisz datę zatrudnienia..." required>
                         <div class="valid-feedback">OK!</div>
                         <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
@@ -49,8 +49,8 @@
                         <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                     <div class="form-group col-md-4 mb-3">
-                        <label for="inputDataZakonczeniaUmowy">Data zakończenia umowy (format: MM.DD.RR)</label>
-                        <input type="text" class="form-control" id="inputDataZakonczeniaUmowy" th:field="*{hireEndDate}"
+                        <label for="inputDataZakonczeniaUmowy">Data zakończenia umowy</label>
+                        <input type="date" class="form-control" id="inputDataZakonczeniaUmowy" th:field="*{hireEndDate}"
                                placeholder="Wpisz date zakończenia umowy...">
                     </div>
                 </div>
