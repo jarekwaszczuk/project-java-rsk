@@ -56,6 +56,10 @@
                     <td th:text="${firm.post}">id</td>
                 </tr>
                 <tr>
+                    <th scope="row">Miejscowość</th>
+                    <td th:text="${firm.city}">id</td>
+                </tr>
+                <tr>
                     <th scope="row">Składka Wypadkowa</th>
                     <td th:text="${firm.accidentDues}">id</td>
                 </tr>
@@ -74,7 +78,7 @@
                             <a href="/firms/update" th:attr="href=@{'/firms/update/'+${firm.id}}">
                                 <button type="button" class="btn btn-primary">Edycja</button>
                             </a>
-                            <a href="/firms/update" th:href="@{'/firms/delete/'+${firm.id}}">
+                            <a href="/firms/update" th:href="@{'/firms/delete/'+${firm.id}}" class="delete"  data-confirm="Czy jesteś pewny, że chcesz usunąć tą pozycję?">
                                 <button type="button" class="btn btn-danger">Usuń</button>
                             </a>
                         </div>
@@ -88,6 +92,16 @@
 </section>
 
 <div th:replace="include/footer :: footer"/>
+<script>
+    $('.delete').on("click", function (e) {
+        e.preventDefault();
 
+        var choice = confirm($(this).attr('data-confirm'));
+
+        if (choice) {
+            window.location.href = $(this).attr('href');
+        }
+    });
+</script>
 </body>
 </html>

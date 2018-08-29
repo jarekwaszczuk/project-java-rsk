@@ -10,7 +10,8 @@
 <section>
     <article>
         <div class="container">
-            <form action="#" th:action="@{/persons/add}" th:object="${person}" method="post" class="needs-validation" novalidate>
+            <form action="#" th:action="@{/persons/add}" th:object="${person}" method="post" class="needs-validation"
+                  novalidate>
                 <div th:each="err : ${#fields.detailedErrors('*')}" th:text=" ${err}" class="error"/>
                 <div class="row">
                     <div class="form-group col">
@@ -35,63 +36,17 @@
                         <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="inputPesel">PESEL</label>
-                    <input type="text" class="form-control" id="inputPesel" name="pesel" th:field="*{pesel}"
-                           placeholder="Wpisz pesel..." required>
-                    <div class="valid-feedback">OK!</div>
-                    <div class="invalid-feedback">Błąd pole wymagane!</div>
-                </div>
                 <div class="row">
                     <div class="form-group col">
-                        <label for="inputUlica">Ulica</label>
-                        <input type="text" class="form-control" id="inputUlica" name="ulica" th:field="*{ulica}"
-                               placeholder="Wpisz ulicę...">
-                    </div>
-                    <div class="form-group col">
-                        <label for="inputNrDomu">Nr domu</label>
-                        <input type="text" class="form-control" id="inputNrDomu" name="nrDomu" th:field="*{nrDomu}"
-                               placeholder="Wpisz nr domu..." required>
+                        <label for="inputPesel">PESEL</label>
+                        <input type="text" class="form-control" id="inputPesel" name="pesel" th:field="*{pesel}"
+                               placeholder="Wpisz pesel..." required>
                         <div class="valid-feedback">OK!</div>
                         <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
-                    <div class="form-group col">
-                        <label for="inputNrLokalu">Nr lokalu</label>
-                        <input type="text" class="form-control" id="inputNrLokalu" name="nrLokalu"
-                               th:field="*{nrLokalu}"
-                               placeholder="Wpisz nr lokalu...">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col">
-                        <label for="inputKodPocztowy">Kod Pocztowy</label>
-                        <input type="text" class="form-control" id="inputKodPocztowy" name="kodPocztowy"
-                               th:field="*{kodPocztowy}"
-                               placeholder="Wpisz kod pocztowy..." required>
-                        <div class="valid-feedback">OK!</div>
-                        <div class="invalid-feedback">Błąd pole wymagane!</div>
-                    </div>
-                    <div class="form-group col">
-                        <label for="inputPoczta">Poczta</label>
-                        <input type="text" class="form-control" id="inputPoczta" name="poczta"
-                               th:field="*{poczta}"
-                               placeholder="Wpisz pocztę..."> required>
-                        <div class="valid-feedback">OK!</div>
-                        <div class="invalid-feedback">Błąd pole wymagane!</div>
-                    </div>
-                    <div class="form-group col">
-                        <label for="inputMiejscowosc">Miejscowość</label>
-                        <input type="text" class="form-control" id="inputMiejscowosc" name="miejscowosc"
-                               th:field="*{miejscowosc}"
-                               placeholder="Wpisz miejscowość..." required>
-                        <div class="valid-feedback">OK!</div>
-                        <div class="invalid-feedback">Błąd pole wymagane!</div>
-                    </div>
-                </div>
-                <div class="row">
                     <div class="form-group col">
                         <label for="inputNrTelefonu">Nr telefonu</label>
-                        <input type="text" class="form-control" id="inputNrTelefonu" name="nrTelefonu"
+                        <input type="tel" class="form-control" id="inputNrTelefonu" name="nrTelefonu"
                                th:field="*{nrTelefonu}"
                                placeholder="Wpisz nr telefonu...">
                     </div>
@@ -99,6 +54,52 @@
                         <label for="inputEmail">E-mail</label>
                         <input type="email" class="form-control" id="inputEmail" name="email" th:field="*{email}"
                                placeholder="Wpisz email...">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-8 mb-3">
+                        <label for="inputUlica">Ulica</label>
+                        <input type="text" class="form-control" id="inputUlica" name="ulica" th:field="*{ulica}"
+                               placeholder="Wpisz ulicę...">
+                    </div>
+                    <div class="form-group col-md-2 mb-2">
+                        <label for="inputNrDomu">Nr domu</label>
+                        <input type="text" class="form-control" id="inputNrDomu" name="nrDomu" th:field="*{nrDomu}"
+                               placeholder="Wpisz nr domu..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
+                    </div>
+                    <div class="form-group col-md-2 mb-2">
+                        <label for="inputNrLokalu">Nr lokalu</label>
+                        <input type="text" class="form-control" id="inputNrLokalu" name="nrLokalu"
+                               th:field="*{nrLokalu}"
+                               placeholder="Wpisz nr lokalu...">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-3 mb-3">
+                        <label for="inputKodPocztowy">Kod Pocztowy</label>
+                        <input type="text" class="form-control" id="inputKodPocztowy" name="kodPocztowy"
+                               th:field="*{kodPocztowy}"
+                               placeholder="Wpisz kod pocztowy..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
+                    </div>
+                    <div class="form-group col-md-4 mb-3">
+                        <label for="inputPoczta">Poczta</label>
+                        <input type="text" class="form-control" id="inputPoczta" name="poczta"
+                               th:field="*{poczta}"
+                               placeholder="Wpisz pocztę..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
+                    </div>
+                    <div class="form-group col-md-5 mb-3">
+                        <label for="inputMiejscowosc">Miejscowość</label>
+                        <input type="text" class="form-control" id="inputMiejscowosc" name="miejscowosc"
+                               th:field="*{miejscowosc}"
+                               placeholder="Wpisz miejscowość..." required>
+                        <div class="valid-feedback">OK!</div>
+                        <div class="invalid-feedback">Błąd pole wymagane!</div>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">ZAPISZ</button>
@@ -110,14 +111,14 @@
 <div th:replace="include/footer :: footer"/>
 <script>
     // Example starter JavaScript for disabling form submissions if there are invalid fields
-    (function() {
+    (function () {
         'use strict';
-        window.addEventListener('load', function() {
+        window.addEventListener('load', function () {
             // Fetch all the forms we want to apply custom Bootstrap validation styles to
             var forms = document.getElementsByClassName('needs-validation');
             // Loop over them and prevent submission
-            var validation = Array.prototype.filter.call(forms, function(form) {
-                form.addEventListener('submit', function(event) {
+            var validation = Array.prototype.filter.call(forms, function (form) {
+                form.addEventListener('submit', function (event) {
                     if (form.checkValidity() === false) {
                         event.preventDefault();
                         event.stopPropagation();

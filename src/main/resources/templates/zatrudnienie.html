@@ -10,41 +10,41 @@
 <section>
     <article>
         <div class="container">
-            <a href="/firms/add">
-                <button type="button" class="btn btn-info">Dodaj nowe stowarzyszenie</button>
+            <a href="/employments/add">
+                <button type="button" class="btn btn-info">Dodaj nowe zatrudnienie</button>
             </a>
             <table class="table table-striped"> <!--table-bordered-->
                 <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Nazwa
+                    <th scope="col">Osoba
                     </th>
-                    <th scope="col">Pełna Nazwa
+                    <th scope="col">Firma
                     </th>
-                    <th scope="col">Ulica
+                    <th scope="col">Data Zatrudnienia
                     </th>
-                    <th scope="col">Miejscowość
+                    <th scope="col">Rodzaj Umowy
                     </th>
                     <th scope="col">Akcja</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="firm : ${firms}">
-                    <td th:text="${firm.id}">id</td>
-                    <td th:text="${firm.name}">id</td>
-                    <td th:text="${firm.fullName}">id</td>
-                    <td th:text="${firm.street}">id</td>
-                    <td th:text="${firm.city}">id</td>
+                <tr th:each="employment : ${employments}">
+                    <td th:text="${employment.id}">id</td>
+                    <td th:text="${employment.person.imie}+' '+${employment.person.nazwisko}">id</td>
+                    <td th:text="${employment.firm.fullName}">id</td>
+                    <td th:text="${employment.hireDate}">id</td>
+                    <td th:text="${employment.agreementType.getDescription()}">id</td>
 
                     <td>
                         <div class="btn-group" role="group" aria-label="Akcje">
-                            <a href="/firms/readone" th:href="@{'/firms/readone/'+${firm.id}}">
+                            <a href="/firms/readone" th:href="@{'/employments/readone/'+${employment.id}}">
                                 <button type="button" class="btn btn-info">Podgląd</button>
                             </a>
-                            <a href="/firms/update" th:attr="href=@{'/firms/update/'+${firm.id}}">
+                            <a href="/firms/update" th:attr="href=@{'/employments/update/'+${employment.id}}">
                                 <button type="button" class="btn btn-primary">Edycja</button>
                             </a>
-                            <a href="/firms/update" th:href="@{'/firms/delete/'+${firm.id}}" class="delete"  data-confirm="Czy jesteś pewny, że chcesz usunąć tą pozycję?">
+                            <a href="/firms/update" th:href="@{'/employments/delete/'+${employment.id}}" class="delete"  data-confirm="Czy jesteś pewny, że chcesz usunąć tą pozycję?">
                                 <button type="button" class="btn btn-danger">Usuń</button>
                             </a>
                         </div>
