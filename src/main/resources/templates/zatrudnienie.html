@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="include/head :: head"/>
+
+<body>
+
+<div th:replace="include/menu :: menu"/>
+
+<section>
+    <article>
+        <div class="container">
+            <a href="/employments/add">
+                <button type="button" class="btn btn-info">Dodaj nowe zatrudnienie</button>
+            </a>
+            <table class="table table-striped"> <!--table-bordered-->
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Osoba
+                    </th>
+                    <th scope="col">Firma
+                    </th>
+                    <th scope="col">Data Zatrudnienia
+                    </th>
+                    <th scope="col">Rodzaj Umowy
+                    </th>
+                    <th scope="col">Akcja</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employment : ${employments}">
+                    <td th:text="${employment.id}">id</td>
+                    <td th:text="${employment.person.imie}+' '+${employment.person.nazwisko}">id</td>
+                    <td th:text="${employment.firm.fullName}">id</td>
+                    <td th:text="${employment.hireDate}">id</td>
+                    <td th:text="${employment.agreementType.getDescription()}">id</td>
+
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Akcje">
+                            <a href="/firms/readone" th:href="@{'/employments/readone/'+${employment.id}}">
+                                <button type="button" class="btn btn-info">Podgląd</button>
+                            </a>
+                            <a href="/firms/update" th:attr="href=@{'/employments/update/'+${employment.id}}">
+                                <button type="button" class="btn btn-primary">Edycja</button>
+                            </a>
+                            <a href="/firms/update" th:href="@{'/employments/delete/'+${employment.id}}" class="delete"  data-confirm="Czy jesteś pewny, że chcesz usunąć tą pozycję?">
+                                <button type="button" class="btn btn-danger">Usuń</button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </article>
+</section>
+
+<div th:replace="include/footer :: footer"/>
+<script>
+    $('.delete').on("click", function (e) {
+        e.preventDefault();
+
+        var choice = confirm($(this).attr('data-confirm'));
+
+        if (choice) {
+            window.location.href = $(this).attr('href');
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,6 +1,9 @@
 package pl.r80.rsk.Person;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import pl.r80.rsk.Employment.Employment;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -8,6 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Set;
 
 @Data
 @Entity
@@ -43,4 +47,9 @@ public class Person implements Serializable {
     String email;
     @Column(name = "log_zmian")
     Timestamp changeLog;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
+    Set<Employment> employmentSet;
 }

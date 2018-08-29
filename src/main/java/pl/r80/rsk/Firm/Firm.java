@@ -1,6 +1,9 @@
 package pl.r80.rsk.Firm;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import pl.r80.rsk.Employment.Employment;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -8,6 +11,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Data
@@ -62,5 +66,8 @@ public class Firm implements Serializable {
     @Column(name = "log_zmian")
     Timestamp changeLog;
 
-
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "firm", fetch = FetchType.EAGER)
+    Set<Employment> employmentSet;
 }
