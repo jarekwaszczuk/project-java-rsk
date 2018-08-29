@@ -3,6 +3,7 @@ package pl.r80.rsk.Firm;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 import pl.r80.rsk.Employment.Employment;
 
 import javax.persistence.*;
@@ -28,7 +29,7 @@ public class Firm implements Serializable {
     String name;
 
     @NotEmpty(message = "Pełna nazwa nie może być pusta")
-    @Size(message = "Musi mieć odpowiednią długość", min = 5, max = 30)
+    @Size(message = "Musi mieć odpowiednią długość", min = 5, max = 100)
     @Column(name = "pelna_nazwa")
     String fullName;
 
@@ -60,6 +61,7 @@ public class Firm implements Serializable {
     @Column(name = "skladka_wypadkowa")
     Double accidentDues;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_skladki_wypadkowej")
     LocalDate accidentDuesDate;
 
