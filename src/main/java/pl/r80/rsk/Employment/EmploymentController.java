@@ -53,34 +53,19 @@ public class EmploymentController implements WebMvcConfigurer {
 
     @GetMapping("/readone/{id}")
     public String readOneById(@PathVariable Integer id, Model model) {
-        Optional<Employment> employment = employmentService.findById(id);
-        if (employment.isPresent()) {
-            model.addAttribute("employment", employment.get());
-        } else {
-            throw new IllegalEmploymentException("No such employment");
-        }
+        verifyEmploymentExist(id, model);
         return "zatrudnienie_read";
     }
 
     @GetMapping("/update/{id}")
     public String updateEmployment(@PathVariable Integer id, Model model) {
-        Optional<Employment> employment = employmentService.findById(id);
-        if (employment.isPresent()) {
-            model.addAttribute("employment", employment.get());
-        } else {
-            throw new IllegalEmploymentException("No such employment");
-        }
+        verifyEmploymentExist(id, model);
         return "zatrudnienie_update";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteEmployment(@PathVariable Integer id, Model model) {
-        Optional<Employment> firm = employmentService.findById(id);
-        if (firm.isPresent()) {
-            model.addAttribute("firm", firm.get());
-        } else {
-            throw new IllegalEmploymentException("No such employment");
-        }
+        verifyEmploymentExist(id, model);
         return "zatrudnienie_delete";
     }
 
@@ -118,7 +103,6 @@ public class EmploymentController implements WebMvcConfigurer {
         return "zatrudnienie_read";
     }
 
-
     private void addDataPrepare(Model model) {
         Iterable<Person> persons = personRepository.findAll();
         Iterable<Firm> firms = firmRepository.findAll();
@@ -126,5 +110,14 @@ public class EmploymentController implements WebMvcConfigurer {
         model.addAttribute("agreementTypes", agreementTypes);
         model.addAttribute("persons", persons);
         model.addAttribute("firms", firms);
+    }
+
+    private void verifyEmploymentExist(@PathVariable Integer id, Model model) {
+        Optional<Employment> employment = employmentService.findById(id);
+        if (employment.isPresent()) {
+            model.addAttribute("employment", employment.get());
+        } else {
+            throw new IllegalEmploymentException("No such employment");
+        }
     }
 }
