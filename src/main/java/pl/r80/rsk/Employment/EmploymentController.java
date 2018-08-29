@@ -86,12 +86,7 @@ public class EmploymentController implements WebMvcConfigurer {
 
     @GetMapping("/add")
     public String addEmployment(@ModelAttribute Employment employment, Model model) {
-        Iterable<Person> persons = personRepository.findAll();
-        Iterable<Firm> firms = firmRepository.findAll();
-        AgreementType[] agreementTypes = AgreementType.values();
-        model.addAttribute("agreementTypes", agreementTypes);
-        model.addAttribute("persons", persons);
-        model.addAttribute("firms", firms);
+        addDataPrepare(model);
         return "zatrudnienie_add";
     }
 
@@ -100,6 +95,12 @@ public class EmploymentController implements WebMvcConfigurer {
                       @ModelAttribute @Valid Employment employment, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
+            addDataPrepare(model);
+            model.addAttribute("personId", personId);
+            model.addAttribute("firmId", firmId);
+            model.addAttribute("agreementType", agreementType);
+            //TODO
+            //z przekazywanych wartośći powyżej zaznaczyć odpowiednie optiony przez selected
             return "zatrudnienie_add";
         }
 
@@ -115,5 +116,15 @@ public class EmploymentController implements WebMvcConfigurer {
         employmentService.save(employment);
 
         return "zatrudnienie_read";
+    }
+
+
+    private void addDataPrepare(Model model) {
+        Iterable<Person> persons = personRepository.findAll();
+        Iterable<Firm> firms = firmRepository.findAll();
+        AgreementType[] agreementTypes = AgreementType.values();
+        model.addAttribute("agreementTypes", agreementTypes);
+        model.addAttribute("persons", persons);
+        model.addAttribute("firms", firms);
     }
 }
