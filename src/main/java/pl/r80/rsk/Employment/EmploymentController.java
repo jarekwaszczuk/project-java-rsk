@@ -11,10 +11,8 @@ import pl.r80.rsk.Firm.Firm;
 import pl.r80.rsk.Firm.FirmRepository;
 import pl.r80.rsk.Person.Person;
 import pl.r80.rsk.Person.PersonRepository;
-import pl.r80.rsk.Person.PersonService;
 
 import javax.validation.Valid;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
