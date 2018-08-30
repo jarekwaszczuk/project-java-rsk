@@ -2,55 +2,31 @@
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="include/head :: head"/>
 <body>
-
-<div th:replace="include/menu2 :: menu"/>
-
+<div th:replace="include/menu2 :: menu-login"/>
 <section>
     <article>
         <div class="container">
-            <p>
-                Quem ad singulis quo do est noster iudicem e ad hic duis amet irure, in et
-                summis arbitror. Incididunt an incurreret. Incurreret a anim. Iis eram multos
-                multos incididunt ab enim arbitror voluptatibus. Laborum quid expetendis nescius
-                id et quis probant. Pariatur dolor amet non quis, ex iis quorum irure lorem, in
-                pariatur cohaerescant, ad et distinguantur. Deserunt iis nisi, hic nulla tamen
-                dolore commodo.
-            </p>
-            <p>
-                Quem ad singulis quo do est noster iudicem e ad hic duis amet irure, in et
-                summis arbitror. Incididunt an incurreret. Incurreret a anim. Iis eram multos
-                multos incididunt ab enim arbitror voluptatibus. Laborum quid expetendis nescius
-                id et quis probant. Pariatur dolor amet non quis, ex iis quorum irure lorem, in
-                pariatur cohaerescant, ad et distinguantur. Deserunt iis nisi, hic nulla tamen
-                dolore commodo.
-            </p>
-            <p>
-                Quem ad singulis quo do est noster iudicem e ad hic duis amet irure, in et
-                summis arbitror. Incididunt an incurreret. Incurreret a anim. Iis eram multos
-                multos incididunt ab enim arbitror voluptatibus. Laborum quid expetendis nescius
-                id et quis probant. Pariatur dolor amet non quis, ex iis quorum irure lorem, in
-                pariatur cohaerescant, ad et distinguantur. Deserunt iis nisi, hic nulla tamen
-                dolore commodo.
-            </p>
-            <p>
-                Quem ad singulis quo do est noster iudicem e ad hic duis amet irure, in et
-                summis arbitror. Incididunt an incurreret. Incurreret a anim. Iis eram multos
-                multos incididunt ab enim arbitror voluptatibus. Laborum quid expetendis nescius
-                id et quis probant. Pariatur dolor amet non quis, ex iis quorum irure lorem, in
-                pariatur cohaerescant, ad et distinguantur. Deserunt iis nisi, hic nulla tamen
-                dolore commodo.
-            </p>
-            <p>
-                Quem ad singulis quo do est noster iudicem e ad hic duis amet irure, in et
-                summis arbitror. Incididunt an incurreret. Incurreret a anim. Iis eram multos
-                multos incididunt ab enim arbitror voluptatibus. Laborum quid expetendis nescius
-                id et quis probant. Pariatur dolor amet non quis, ex iis quorum irure lorem, in
-                pariatur cohaerescant, ad et distinguantur. Deserunt iis nisi, hic nulla tamen
-                dolore commodo.
-            </p>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 offset-lg-3 offset-md-3">
+                    <form action="/" method="post">
+                        <div class="form-group">
+                            <label for="inputLogin">Login</label>
+                            <input type="text" class="form-control" id="inputLogin" name="login"
+                                   placeholder="Wprowadź login..." required>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword">Hasło</label>
+                            <input type="password" class="form-control" id="inputPassword" name="password"
+                                   placeholder="Wprowadź hasło..." required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Zaloguj</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </article>
 </section>
-<div th:replace="include/footer2 :: footer"/>
+
+<div th:replace="include/footer-login :: footer-login"/>
 </body>
 </html>

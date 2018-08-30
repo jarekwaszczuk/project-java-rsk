@@ -23,7 +23,7 @@
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
-  overflow: auto;
+  /*overflow: auto;*/
   direction: ltr;
   
   -webkit-touch-callout: none;
