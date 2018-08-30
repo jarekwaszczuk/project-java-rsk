@@ -38,7 +38,7 @@
 				startYear: !isNaN(parseInt(opt.startYear)) ? parseInt(opt.startYear) : new Date().getFullYear(),
 				minDate: opt.minDate instanceof Date ? opt.minDate : null,
 				maxDate: opt.maxDate instanceof Date ? opt.maxDate : null,
-				language: (opt.language != null && dates[opt.language] != null) ? opt.language : 'en',
+				language: (opt.language != null && dates[opt.language] != null) ? opt.language : 'pl',
 				allowOverlap: opt.allowOverlap != null ? opt.allowOverlap : true,
 				displayWeekNumber: opt.displayWeekNumber != null ? opt.displayWeekNumber : false,
 				alwaysHalfDay: opt.alwaysHalfDay != null ? opt.alwaysHalfDay : false,

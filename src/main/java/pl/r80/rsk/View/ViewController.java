@@ -16,6 +16,7 @@ public class ViewController implements WebMvcConfigurer {
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/kalendarz").setViewName("kalendarz");
         registry.addViewController("/bootstrap-year-calendar-1.1.0/js/bootstrap-year-calendar.js").setViewName("bootstrap-year-calendar-1.1.0/js/bootstrap-year-calendar.js");
+        registry.addViewController("/bootstrap-year-calendar-1.1.0/js/languages/bootstrap-year-calendar.pl.js").setViewName("bootstrap-year-calendar-1.1.0/js/languages/bootstrap-year-calendar.pl.js");
         registry.addViewController("/bootstrap-year-calendar-1.1.0/css/bootstrap-year-calendar.css").setViewName("bootstrap-year-calendar-1.1.0/css/bootstrap-year-calendar.css");
     }
 
