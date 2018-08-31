@@ -130,4 +130,14 @@ public class EmploymentController implements WebMvcConfigurer {
             throw new IllegalEmploymentException("No such employment");
         }
     }
+
+    @PostMapping("/update")
+    public String update(@Valid Employment employment, BindingResult bindingResult, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
+        if (bindingResult.hasErrors()) {
+            return "zatrudnienie_update";
+        }
+        employmentService.update(employment);
+        return "zatrudnienie_read";
+    }
 }

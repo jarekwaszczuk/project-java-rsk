@@ -32,4 +32,10 @@ public class EmploymentService {
     public void delete(Employment employment) {
         employmentRepository.delete(employment);
     }
+
+    public void update(Employment employment) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        employment.setChangeLog(timestamp);
+        employmentRepository.save(employment);
+    }
 }
