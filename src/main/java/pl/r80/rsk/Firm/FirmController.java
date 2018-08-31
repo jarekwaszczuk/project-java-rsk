@@ -81,6 +81,7 @@ public class FirmController implements WebMvcConfigurer {
         } else {
             throw new IllegalFirmException("No such firm");
         }
+        firmService.delete(firm);
         return "stowarzyszenie_delete";
     }
 
@@ -136,13 +137,7 @@ public class FirmController implements WebMvcConfigurer {
         if (bindingResult.hasErrors()) {
             return "stowarzyszenie_update";
         }
-        return "redirect:/stowarzyszenie_read";
-    }
-
-    //todo
-    @PostMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id, Model model) {
-        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
-        return "redirect:/stowarzyszenia";
+        firmService.update(firm);
+        return "stowarzyszenie_read";
     }
 }
