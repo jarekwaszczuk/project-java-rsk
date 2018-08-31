@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
@@ -31,6 +33,7 @@ public class FirmController implements WebMvcConfigurer {
         registry.addViewController("/stowarzyszenie_add").setViewName("stowarzyszenie_add");
         registry.addViewController("/stowarzyszenie_update").setViewName("stowarzyszenie_update");
         registry.addViewController("/stowarzyszenie_delete").setViewName("stowarzyszenie_delete");
+        registry.addViewController("/stowarzyszenie_change").setViewName("stowarzyszenie_change");
     }
 
     @GetMapping
@@ -95,6 +98,24 @@ public class FirmController implements WebMvcConfigurer {
 
         firmService.save(firm);
         return "stowarzyszenie_read";
+    }
+
+    @GetMapping("/change")
+    public String changeFirmKontekst(@ModelAttribute Firm firm, Model model) {
+        Iterable<Firm> firms = firmService.findAll();
+        model.addAttribute("firms", firms);
+        return "stowarzyszenie_change";
+    }
+
+    @PostMapping("/change")
+    public String doChangeFirmKontekst(HttpServletRequest request, HttpServletResponse response,
+                                       @RequestParam Integer firmId, Model model){
+
+        Optional<Firm> firmDB = firmService.findById(firmId);
+        Firm firm = firmDB.get();
+        request.getSession().setAttribute("KONTEKST", firmId);
+        model.addAttribute("firmKontekst", firm);
+        return "logged";
     }
 
     //todo

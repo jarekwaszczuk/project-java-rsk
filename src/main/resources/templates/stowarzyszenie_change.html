@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="include/head :: head"/>
+
+<body>
+
+<div th:replace="include/menu :: menu"/>
+
+<section>
+    <article>
+        <div class="container">
+
+            <form action="/firms/change" method="post">
+                <select class="custom-select" id="inputStowarzyszenie" name="firmId">
+                    <option th:each="firm :${firms}" value="#" th:value="${firm.id}" th:text="${firm.fullName}">firma</option>
+                </select>
+                <button type="submit" class="btn btn-primary">ZMIEŃ KONTEKST</button>
+            </form>
+
+        </div>
+    </article>
+</section>
+
+<div th:replace="include/footer :: footer"/>
+<script>
+    $('.delete').on("click", function (e) {
+        e.preventDefault();
+
+        var choice = confirm($(this).attr('data-confirm'));
+
+        if (choice) {
+            window.location.href = $(this).attr('href');
+        }
+    });
+</script>
+</body>
+</html>

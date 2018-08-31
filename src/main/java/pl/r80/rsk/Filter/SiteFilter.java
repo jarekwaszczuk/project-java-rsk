@@ -2,15 +2,12 @@ package pl.r80.rsk.Filter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import pl.r80.rsk.Firm.Firm;
 import pl.r80.rsk.Firm.FirmService;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
 
 @Controller
 public class SiteFilter implements Filter {
@@ -38,7 +35,7 @@ public class SiteFilter implements Filter {
                 res.sendRedirect(request.getServletContext().getContextPath() + "/");
             }
 //            else{
-//                Integer kontekst = req.getSession().getAttribute("KONTEKST")
+//                Integer kontekst = req.getSession().getAttribute("KONTEKST");
 //                Optional<Firm> firmDB = firmService.findById(kontekst);
 //                Firm firm = firmDB.get();
 //
