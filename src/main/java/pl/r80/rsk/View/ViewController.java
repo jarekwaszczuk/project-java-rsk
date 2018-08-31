@@ -26,6 +26,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 
+import static pl.r80.rsk.Utilities.Utilities.passwordToSha256AndToHex;
+
 @Controller
 @RequestMapping(value = "/")
 public class ViewController implements WebMvcConfigurer {
@@ -86,8 +88,6 @@ public class ViewController implements WebMvcConfigurer {
 
             String passSha256Hex = passwordToSha256AndToHex(password);
 
-            LOGGER.info("Zahashowane hasło: {}", passSha256Hex);
-
             Optional<Access> userDB = accessService.findUser(login);
             Access userEntity = userDB.get();
 
@@ -109,18 +109,5 @@ public class ViewController implements WebMvcConfigurer {
             return "logged";
         }
         return "index";
-    }
-
-    private static String passwordToSha256AndToHex(String passToSha256) throws NoSuchAlgorithmException {
-        MessageDigest digest = MessageDigest.getInstance("SHA-256");
-        byte[] encodedhash = digest.digest(
-                passToSha256.getBytes(StandardCharsets.UTF_8));
-        StringBuffer hexString = new StringBuffer();
-        for (int i = 0; i < encodedhash.length; i++) {
-            String hex = Integer.toHexString(0xff & encodedhash[i]);
-            if(hex.length() == 1) hexString.append('0');
-            hexString.append(hex);
-        }
-        return hexString.toString();
     }
 }

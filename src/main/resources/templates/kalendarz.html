@@ -1,21 +1,16 @@
 <!DOCTYPE HTML>
 <html lang="pl" xmlns:th="http://www.thymeleaf.org">
 <div th:replace="include/head :: head"/>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.min.css">
 <link rel="stylesheet" type="text/css" href="bootstrap-year-calendar-1.1.0/css/bootstrap-year-calendar.css"/>
 <body>
 
 <div th:replace="include/menu :: menu"/>
-<h1>Kalendarz</h1>
 <section>
     <article>
-        <div class="panel panel-default" style="margin:10px;">
-            <div class="panel-heading">Calendar</div>
             <div class="panel-body">
                 <div id="calendar"></div>
             </div>
-        </div>
         <div class="modal modal-fade" id="event-modal">
             <div class="modal-dialog">
                 <div class="modal-content">
