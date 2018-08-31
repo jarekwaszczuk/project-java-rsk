@@ -10,6 +10,8 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Controller
 public class SiteFilter implements Filter {
@@ -33,7 +35,7 @@ public class SiteFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
 
-        LOGGER.info("Żądanie {} z: {}", req.getMethod(), req.getRequestURI());
+        LOGGER.info("[{} {}] Żądanie {} z: {}", LocalDate.now(), LocalTime.now(), req.getMethod(), req.getRequestURI());
 
         if (!"/".equals(req.getRequestURI())) {
             if (req.getSession().getAttribute("SECURITY_CONTEXT_KEY") == null) {
