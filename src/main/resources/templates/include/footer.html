@@ -10,7 +10,10 @@
                     <a class="link" href="mailto:jarekwaszczuk@poczta.fm">Jarosław P. Waszczuk</a>
                 </div>
             </footer>
-            <span class="navbar-text">Kontekst: <a class="link" href="#"><div th:text="${firm.fullName}">#</div> </a></span>
+            <span class="navbar-text">Kontekst: <a class="link" href="/firms/changefirm">#</a></span>
+            <!--<span class="navbar-text">Kontekst: <a class="link" href="/firms/changefirm" th:if="${firmKontekst.fullName not null}" th:text="${firmKontekst.fullName}">#</a></span>-->
+            <!--<span class="navbar-text">Kontekst: <a class="link" href="/firms/changefirm" th:text="${#strings.defaultString(firmKontekst.fullName,'null')}">#</a></span>-->
+            <!--<span class="navbar-text">Kontekst: <a class="link" href="/firms/changefirm" th:text="${firmKontekst.fullName} ? ${firmKontekst.fullName} : 'null value!'">#</a></span>-->
         </nav>
     </section>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

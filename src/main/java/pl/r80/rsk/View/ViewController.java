@@ -6,17 +6,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pl.r80.rsk.Access.Access;
 import pl.r80.rsk.Access.AccessService;
+import pl.r80.rsk.Firm.Firm;
+import pl.r80.rsk.Firm.FirmService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.Optional;
 
 @Controller
@@ -24,10 +23,12 @@ import java.util.Optional;
 public class ViewController implements WebMvcConfigurer {
 
     private final AccessService accessService;
+    private final FirmService firmService;
 
     @Autowired
-    public ViewController(AccessService accessService) {
+    public ViewController(AccessService accessService, FirmService firmService) {
         this.accessService = accessService;
+        this.firmService = firmService;
     }
 
     @Override
@@ -69,6 +70,12 @@ public class ViewController implements WebMvcConfigurer {
             if (userEntity.getPassword().equals(password)) {
                 HttpSession session = req.getSession(true);
                 session.setAttribute("SECURITY_CONTEXT_KEY", "zalogowany");
+
+                Optional<Firm> firmDB = firmService.findById(userEntity.getDefaultContext());
+                Firm firm = firmDB.get();
+                session.setAttribute("KONTEKST", firm.getId());
+                model.addAttribute("firmKontekst", firm);
+
                 return "logged";
             } else {
                 return "index";

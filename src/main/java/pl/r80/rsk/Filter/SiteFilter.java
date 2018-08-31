@@ -1,14 +1,26 @@
 package pl.r80.rsk.Filter;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import pl.r80.rsk.Firm.Firm;
+import pl.r80.rsk.Firm.FirmService;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @Controller
 public class SiteFilter implements Filter {
+
+    private final FirmService firmService;
+
+    @Autowired
+    public SiteFilter(FirmService firmService) {
+        this.firmService = firmService;
+    }
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -25,7 +37,16 @@ public class SiteFilter implements Filter {
             if (req.getSession().getAttribute("SECURITY_CONTEXT_KEY") == null) {
                 res.sendRedirect(request.getServletContext().getContextPath() + "/");
             }
+//            else{
+//                Integer kontekst = req.getSession().getAttribute("KONTEKST")
+//                Optional<Firm> firmDB = firmService.findById(kontekst);
+//                Firm firm = firmDB.get();
+//
+//                setKontekst(firm, model);
+//
+//            }
         }
+
         chain.doFilter(request, response);
     }
 
@@ -33,4 +54,9 @@ public class SiteFilter implements Filter {
     public void destroy() {
 
     }
+
+//    private Model setKontekst(Firm firm, Model model){
+//        model.addAttribute("firmKontekst", firm);
+//        return model;
+//    }
 }
