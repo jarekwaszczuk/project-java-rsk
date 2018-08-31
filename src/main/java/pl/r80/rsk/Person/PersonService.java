@@ -30,4 +30,14 @@ public class PersonService {
         person.setChangeLog(timestamp);
         personRepository.save(person);
     }
+
+    public void update(Person person) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        person.setChangeLog(timestamp);
+        personRepository.save(person);
+    }
+
+    public void delete(Optional<Person> person) {
+        personRepository.delete(person.get());
+    }
 }

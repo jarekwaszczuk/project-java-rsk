@@ -77,7 +77,8 @@ public class PersonController implements WebMvcConfigurer {
         } else {
             throw new IllegalPersonException("No such person");
         }
-        return "osoby_delete";
+        personService.delete(person);
+        return "logged";
     }
 
     @GetMapping("/add")
@@ -101,17 +102,10 @@ public class PersonController implements WebMvcConfigurer {
         return "osoby_read";
     }
 
-    //todo
     @PostMapping("/update")
     public String update(@Valid Person person, BindingResult bindingResult, Model model){
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
-        return "index";
-    }
-
-    //todo
-    @PostMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id, Model model){
-        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
-        return "index";
+        personService.update(person);
+        return "osoby_read";
     }
 }
