@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
@@ -18,6 +19,9 @@ import java.util.Optional;
 @Controller
 @RequestMapping(value = "/firms")
 public class FirmController implements WebMvcConfigurer {
+
+    @Autowired
+    private HttpSession httpSession;
 
     public final FirmService firmService;
 
@@ -38,6 +42,7 @@ public class FirmController implements WebMvcConfigurer {
 
     @GetMapping
     public String findAll(Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         List<Firm> firmIterable = firmService.findAll();
         model.addAttribute("firms", firmIterable);
         return "stowarzyszenia";
@@ -45,6 +50,7 @@ public class FirmController implements WebMvcConfigurer {
 
     @GetMapping("/readone/{id}")
     public String readOneById(@PathVariable Integer id, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Optional<Firm> firm = firmService.findById(id);
         if (firm.isPresent()) {
             model.addAttribute("firm", firm.get());
@@ -56,6 +62,7 @@ public class FirmController implements WebMvcConfigurer {
 
     @GetMapping("/update/{id}")
     public String updateFirm(@PathVariable Integer id, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Optional<Firm> firm = firmService.findById(id);
         if (firm.isPresent()) {
             model.addAttribute("firm", firm.get());
@@ -67,6 +74,7 @@ public class FirmController implements WebMvcConfigurer {
 
     @GetMapping("/delete/{id}")
     public String deleteFirm(@PathVariable Integer id, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Optional<Firm> firm = firmService.findById(id);
         if (firm.isPresent()) {
             model.addAttribute("firm", firm.get());
@@ -78,11 +86,13 @@ public class FirmController implements WebMvcConfigurer {
 
     @GetMapping("/add")
     public String addFirm(@ModelAttribute Firm firm, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         return "stowarzyszenie_add";
     }
 
     @PostMapping("/add")
     public String add(@ModelAttribute @Valid Firm firm, BindingResult bindingResult, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         if (bindingResult.hasErrors()) {
             return "stowarzyszenie_add";
         }
@@ -102,6 +112,7 @@ public class FirmController implements WebMvcConfigurer {
 
     @GetMapping("/change")
     public String changeFirmKontekst(@ModelAttribute Firm firm, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Iterable<Firm> firms = firmService.findAll();
         model.addAttribute("firms", firms);
         return "stowarzyszenie_change";
@@ -113,7 +124,7 @@ public class FirmController implements WebMvcConfigurer {
 
         Optional<Firm> firmDB = firmService.findById(firmId);
         Firm firm = firmDB.get();
-        request.getSession().setAttribute("KONTEKST", firmId);
+        request.getSession().setAttribute("KONTEKST", firm);
         model.addAttribute("firmKontekst", firm);
         return "logged";
     }
@@ -121,6 +132,7 @@ public class FirmController implements WebMvcConfigurer {
     //todo
     @PostMapping("/update")
     public String update(@Valid Firm firm, BindingResult bindingResult, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         if (bindingResult.hasErrors()) {
             return "stowarzyszenie_update";
         }
@@ -130,6 +142,7 @@ public class FirmController implements WebMvcConfigurer {
     //todo
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Integer id, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         return "redirect:/stowarzyszenia";
     }
 }

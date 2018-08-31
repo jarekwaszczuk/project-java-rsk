@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -15,6 +16,9 @@ import java.util.Optional;
 @Controller
 @RequestMapping(value = "/persons")
 public class PersonController implements WebMvcConfigurer {
+
+    @Autowired
+    private HttpSession httpSession;
 
     private final PersonService personService;
 
@@ -34,7 +38,7 @@ public class PersonController implements WebMvcConfigurer {
 
     @GetMapping
     public String findAll(Model model) {
-
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         List<Person> personIterable = personService.findAll();
         model.addAttribute("persons", personIterable);
         return "osoby";
@@ -42,6 +46,7 @@ public class PersonController implements WebMvcConfigurer {
 
     @GetMapping("/readone/{id}")
     public String readOneById(@PathVariable Integer id, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Optional<Person> person = personService.findById(id);
         if (person.isPresent()) {
             model.addAttribute("person", person.get());
@@ -53,6 +58,7 @@ public class PersonController implements WebMvcConfigurer {
 
     @GetMapping("/update/{id}")
     public String updatePerson(@PathVariable Integer id, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Optional<Person> person = personService.findById(id);
         if (person.isPresent()) {
             model.addAttribute("person", person.get());
@@ -64,6 +70,7 @@ public class PersonController implements WebMvcConfigurer {
 
     @GetMapping("/delete/{id}")
     public String deletePerson(@PathVariable Integer id, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Optional<Person> person = personService.findById(id);
         if (person.isPresent()) {
             model.addAttribute("person", person.get());
@@ -75,11 +82,13 @@ public class PersonController implements WebMvcConfigurer {
 
     @GetMapping("/add")
     public String addPerson(@ModelAttribute Person person, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         return "osoby_add";
     }
 
     @PostMapping("/add")
     public String add(@ModelAttribute @Valid Person person, BindingResult bindingResult, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         //TODO walidacja peselu
 //        if (!validate(person.pesel)) {
 //            bindingResult.addError(new ObjectError("pesel", "Pesel niepoprawny");
@@ -95,14 +104,14 @@ public class PersonController implements WebMvcConfigurer {
     //todo
     @PostMapping("/update")
     public String update(@Valid Person person, BindingResult bindingResult, Model model){
-
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         return "index";
     }
 
     //todo
     @PostMapping("/delete/{id}")
     public String delete(@PathVariable Integer id, Model model){
-
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         return "index";
     }
 }
