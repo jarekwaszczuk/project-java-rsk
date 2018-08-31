@@ -12,6 +12,7 @@ import pl.r80.rsk.Firm.FirmRepository;
 import pl.r80.rsk.Person.Person;
 import pl.r80.rsk.Person.PersonRepository;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +20,9 @@ import java.util.Optional;
 @Controller
 @RequestMapping(value = "/employments")
 public class EmploymentController implements WebMvcConfigurer {
+
+    @Autowired
+    private HttpSession httpSession;
 
     public final EmploymentService employmentService;
     public final PersonRepository personRepository;
@@ -43,7 +47,7 @@ public class EmploymentController implements WebMvcConfigurer {
 
     @GetMapping
     public String findAll(Model model) {
-
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         List<Employment> employmentIterable = employmentService.findAll();
         model.addAttribute("employments", employmentIterable);
         return "zatrudnienie";
@@ -51,24 +55,30 @@ public class EmploymentController implements WebMvcConfigurer {
 
     @GetMapping("/readone/{id}")
     public String readOneById(@PathVariable Integer id, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         verifyEmploymentExist(id, model);
         return "zatrudnienie_read";
     }
 
     @GetMapping("/update/{id}")
     public String updateEmployment(@PathVariable Integer id, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         verifyEmploymentExist(id, model);
         return "zatrudnienie_update";
     }
 
     @GetMapping("/delete/{id}")
     public String deleteEmployment(@PathVariable Integer id, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         verifyEmploymentExist(id, model);
-        return "zatrudnienie_delete";
+        Optional<Employment> employment = employmentService.findById(id);
+        employmentService.delete(employment.get());
+        return "logged";
     }
 
     @GetMapping("/add")
     public String addEmployment(@ModelAttribute Employment employment, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         addDataPrepare(model);
         return "zatrudnienie_add";
     }
@@ -76,7 +86,7 @@ public class EmploymentController implements WebMvcConfigurer {
     @PostMapping("/add")
     public String add(@RequestParam Integer personId, @RequestParam AgreementType agreementType, @RequestParam Integer firmId, @RequestParam String hireDate,
                       @ModelAttribute @Valid Employment employment, BindingResult bindingResult, Model model) {
-
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         if (bindingResult.hasErrors()) {
             addDataPrepare(model);
             model.addAttribute("personId", personId);
@@ -102,6 +112,7 @@ public class EmploymentController implements WebMvcConfigurer {
     }
 
     private void addDataPrepare(Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Iterable<Person> persons = personRepository.findAll();
         Iterable<Firm> firms = firmRepository.findAll();
         AgreementType[] agreementTypes = AgreementType.values();
@@ -111,11 +122,22 @@ public class EmploymentController implements WebMvcConfigurer {
     }
 
     private void verifyEmploymentExist(@PathVariable Integer id, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Optional<Employment> employment = employmentService.findById(id);
         if (employment.isPresent()) {
             model.addAttribute("employment", employment.get());
         } else {
             throw new IllegalEmploymentException("No such employment");
         }
+    }
+
+    @PostMapping("/update")
+    public String update(@Valid Employment employment, BindingResult bindingResult, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
+        if (bindingResult.hasErrors()) {
+            return "zatrudnienie_update";
+        }
+        employmentService.update(employment);
+        return "zatrudnienie_read";
     }
 }

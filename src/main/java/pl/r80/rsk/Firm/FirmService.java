@@ -28,4 +28,13 @@ public class FirmService {
         firmRepository.save(firm);
     }
 
+    public void delete(Optional<Firm> firm) {
+        firmRepository.delete(firm.get());
+    }
+
+    public void update(Firm firm) {
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        firm.setChangeLog(timestamp);
+        firmRepository.save(firm);
+    }
 }

@@ -12,8 +12,10 @@
         <div class="container">
             <form action="#" th:action="@{/employments/update}" th:object="${employment}" method="post" class="needs-validation"
                   novalidate>
+                <input type="hidden" th:field="*{id}">
                 <input type="hidden" th:field="*{person}"/>
                 <input type="hidden" th:field="*{firm}"/>
+                <input type="hidden" th:field="*{agreementType}"/>
                 <div class="row">
                     <div class="form-group col">
                         <label for="inputImieiNazwisko">Imię i Nazwisko</label>

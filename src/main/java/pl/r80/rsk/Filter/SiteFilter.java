@@ -1,21 +1,23 @@
 package pl.r80.rsk.Filter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import pl.r80.rsk.Firm.Firm;
 import pl.r80.rsk.Firm.FirmService;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Controller
 public class SiteFilter implements Filter {
 
     private final FirmService firmService;
+    private static final Logger LOGGER = LoggerFactory.getLogger(SiteFilter.class);
 
     @Autowired
     public SiteFilter(FirmService firmService) {
@@ -32,21 +34,13 @@ public class SiteFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+        LOGGER.info("[{} {}] Żądanie {} z: {}", LocalDate.now(), LocalTime.now(), req.getMethod(), req.getRequestURI());
 
         if (!"/".equals(req.getRequestURI())) {
             if (req.getSession().getAttribute("SECURITY_CONTEXT_KEY") == null) {
                 res.sendRedirect(request.getServletContext().getContextPath() + "/");
             }
-//            else{
-//                Integer kontekst = req.getSession().getAttribute("KONTEKST")
-//                Optional<Firm> firmDB = firmService.findById(kontekst);
-//                Firm firm = firmDB.get();
-//
-//                setKontekst(firm, model);
-//
-//            }
         }
-
         chain.doFilter(request, response);
     }
 
@@ -54,9 +48,4 @@ public class SiteFilter implements Filter {
     public void destroy() {
 
     }
-
-//    private Model setKontekst(Firm firm, Model model){
-//        model.addAttribute("firmKontekst", firm);
-//        return model;
-//    }
 }

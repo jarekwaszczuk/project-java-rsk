@@ -11,7 +11,10 @@
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">
                     <div class="display-4" id="tytul">RSK - Rachunkowość Stowarzyszeń Katarzyny</div>
-                    <h1>Zalogowano</h1>
+                    <div class="lead">Kontekst:
+                        <a class="link" href="/firms/change" th:text="${firmKontekst != null} ? ${firmKontekst.fullName} : '#'">#</a>
+                    </div>
+
                 </div>
             </div>
         </div>
