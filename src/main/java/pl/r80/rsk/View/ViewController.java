@@ -19,11 +19,7 @@ import pl.r80.rsk.Firm.FirmService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.Optional;
 
 import static pl.r80.rsk.Utilities.Utilities.passwordToSha256AndToHex;
