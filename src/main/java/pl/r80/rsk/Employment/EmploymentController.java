@@ -71,7 +71,9 @@ public class EmploymentController implements WebMvcConfigurer {
     public String deleteEmployment(@PathVariable Integer id, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         verifyEmploymentExist(id, model);
-        return "zatrudnienie_delete";
+        Optional<Employment> employment = employmentService.findById(id);
+        employmentService.delete(employment.get());
+        return "logged";
     }
 
     @GetMapping("/add")

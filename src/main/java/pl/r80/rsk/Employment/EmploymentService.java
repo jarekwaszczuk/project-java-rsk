@@ -28,4 +28,8 @@ public class EmploymentService {
         employment.setChangeLog(timestamp);
         employmentRepository.save(employment);
     }
+
+    public void delete(Employment employment) {
+        employmentRepository.delete(employment);
+    }
 }
