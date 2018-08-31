@@ -1,5 +1,7 @@
 package pl.r80.rsk.Filter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import pl.r80.rsk.Firm.FirmService;
@@ -13,6 +15,7 @@ import java.io.IOException;
 public class SiteFilter implements Filter {
 
     private final FirmService firmService;
+    private static final Logger LOGGER = LoggerFactory.getLogger(SiteFilter.class);
 
     @Autowired
     public SiteFilter(FirmService firmService) {
@@ -29,6 +32,8 @@ public class SiteFilter implements Filter {
 
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
+
+        LOGGER.info("Żądanie {} z: {}", req.getMethod(), req.getRequestURI());
 
         if (!"/".equals(req.getRequestURI())) {
             if (req.getSession().getAttribute("SECURITY_CONTEXT_KEY") == null) {
