@@ -12,7 +12,7 @@
                 <div class="container">
                     <div class="display-4" id="tytul">RSK - Rachunkowość Stowarzyszeń Katarzyny</div>
                     <div class="lead">Kontekst:
-                        <a class="link" href="/firms/change" th:text="${firmKontekst.fullName}">#</a>
+                        <a class="link" href="/firms/change" th:text="${firmKontekst != null} ? ${firmKontekst.fullName} : '#'">#</a>
                     </div>
 
                 </div>
