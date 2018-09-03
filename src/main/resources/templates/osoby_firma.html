@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="include/head :: head"/>
+
+<body>
+
+<div th:replace="include/menu :: menu"/>
+
+<section>
+    <article>
+        <div class="container">
+            <a href="/persons/add">
+                <button type="button" class="btn btn-info">Dodaj nową osobę</button>
+            </a>
+            <table class="table table-striped"> <!--table-bordered-->
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Imię
+                    </th>
+                    <th scope="col">Drugie Imię
+                    </th>
+                    <th scope="col">Nazwisko
+                    </th>
+                    <th scope="col">Pesel
+                    </th>
+                    <th scope="col">Kod Pocztowy
+                    </th>
+                    <th scope="col">Poczta
+                    </th>
+                    <th scope="col">Typ umowy
+                    </th>
+                    <th scope="col">Akcja</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="employment : ${employments}">
+                    <td th:text="${employment.id}">id</td>
+                    <td th:text="${employment.person.imie}">id</td>
+                    <td th:text="${employment.person.drugieImie}">id</td>
+                    <td th:text="${employment.person.nazwisko}">id</td>
+                    <td th:text="${employment.person.pesel}">id</td>
+                    <td th:text="${employment.person.kodPocztowy}">id</td>
+                    <td th:text="${employment.person.poczta}">id</td>
+                    <td th:text="${employment.agreementType.description}">id</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Akcje">
+                            <a href="/persons/readone" th:href="@{'/persons/readone/'+${employment.person.id}}">
+                                <button type="button" class="btn btn-info">Podgląd</button>
+                            </a>
+                            <a href="/persons/update" th:attr="href=@{'/persons/update/'+${employment.person.id}}">
+                                <button type="button" class="btn btn-primary">Edycja</button>
+                            </a>
+                            <a href="/persons/update" th:href="@{'/persons/delete/'+${employment.person.id}}" class="delete"  data-confirm="Czy jesteś pewny, że chcesz usunąć tą pozycję?">
+                                <button type="button" class="btn btn-danger">Usuń</button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </article>
+</section>
+
+<div th:replace="include/footer :: footer"/>
+<script>
+    $('.delete').on("click", function (e) {
+        e.preventDefault();
+
+        var choice = confirm($(this).attr('data-confirm'));
+
+        if (choice) {
+            window.location.href = $(this).attr('href');
+        }
+    });
+</script>
+</body>
+</html>

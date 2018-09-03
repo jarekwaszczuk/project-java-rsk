@@ -1,6 +1,7 @@
 package pl.r80.rsk.Employment;
 
 import org.springframework.stereotype.Service;
+import pl.r80.rsk.Firm.Firm;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -37,5 +38,9 @@ public class EmploymentService {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         employment.setChangeLog(timestamp);
         employmentRepository.save(employment);
+    }
+
+    public List<Employment> findByFirm(Firm firm) {
+        return employmentRepository.findByFirm(firm);
     }
 }
