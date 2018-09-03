@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <th scope="row">Wynagrodzenie</th>
-                    <td th:text="${employment.salary}">id</td>
+                    <td th:text="${#numbers.formatDecimal(employment.salary, 0, 'DEFAULT', 2, 'DEFAULT')+' zł'}">id</td>
                 </tr>
                 <tr>
                     <th scope="row">Data zakończenia zatrudnienia</th>
@@ -57,7 +57,8 @@
                             <a href="/employments/update" th:attr="href=@{'/employments/update/'+${employment.id}}">
                                 <button type="button" class="btn btn-primary">Edycja</button>
                             </a>
-                            <a href="/employments/update" th:href="@{'/employments/delete/'+${employment.id}}" class="delete"
+                            <a href="/employments/update" th:href="@{'/employments/delete/'+${employment.id}}"
+                               class="delete"
                                data-confirm="Czy jesteś pewny, że chcesz usunąć tą pozycję?">
                                 <button type="button" class="btn btn-danger">Usuń</button>
                             </a>

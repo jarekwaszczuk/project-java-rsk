@@ -7,6 +7,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import pl.r80.rsk.Employment.Employment;
+import pl.r80.rsk.Employment.EmploymentService;
+import pl.r80.rsk.Firm.Firm;
+import pl.r80.rsk.Firm.FirmService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -21,10 +25,14 @@ public class PersonController implements WebMvcConfigurer {
     private HttpSession httpSession;
 
     private final PersonService personService;
+    private final FirmService firmService;
+    private final EmploymentService employmentService;
 
     @Autowired
-    public PersonController(PersonService personService) {
+    public PersonController(PersonService personService, FirmService firmService, EmploymentService employmentService) {
         this.personService = personService;
+        this.firmService = firmService;
+        this.employmentService = employmentService;
     }
 
     @Override
@@ -108,4 +116,14 @@ public class PersonController implements WebMvcConfigurer {
         personService.update(person);
         return "osoby_read";
     }
+
+    @GetMapping("/byfirm")
+    public String findAllByFirm(Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
+        Firm firm = (Firm) httpSession.getAttribute("KONTEKST");
+        List<Employment> employmentList = employmentService.findByFirm(firm);
+        model.addAttribute("employments", employmentList);
+        return "osoby_firma";
+    }
+
 }
