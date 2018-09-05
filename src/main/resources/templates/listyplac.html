@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="include/head :: head"/>
+
+<body>
+
+<div th:replace="include/menu :: menu"/>
+
+<section>
+    <article>
+        <div class="container">
+            <table class="table table-striped"> <!--table-bordered-->
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nr listy</th>
+                    <th scope="col">Data utworzenia</th>
+                    <th scope="col">Suma do wypłaty</th>
+                    <th scope="col">Stowarzyszenie</th>
+                    <th scope="col">Akcja</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="payroll : ${listyplac}">
+                    <td th:text="${payroll.id}">id</td>
+                    <td th:text="${payroll.payrollNumber}">id</td>
+                    <td th:text="${payroll.createDate}">id</td>
+                    <td th:text="${#numbers.formatDecimal(payroll.sumToPay, 0, 'DEFAULT', 2, 'DEFAULT')+' zł'}">id</td>
+                    <td th:text="${payroll.firm.fullName}">id</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Akcje">
+                            <a href="/payrolls/readone" th:href="@{'/payrolls/readone/'+${payroll.id}}">
+                                <button type="button" class="btn btn-info">Podgląd</button>
+                            </a>
+                            <a href="/payrolls/update" th:attr="href=@{'/payrolls/update/'+${payroll.id}}">
+                                <button type="button" class="btn btn-primary">Edycja</button>
+                            </a>
+                            <a href="/payrolls/update" th:href="@{'/payrolls/delete/'+${payroll.id}}" class="delete"  data-confirm="Czy jesteś pewny, że chcesz usunąć tą pozycję?">
+                                <button type="button" class="btn btn-danger">Usuń</button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </article>
+</section>
+
+<div th:replace="include/footer :: footer"/>
+
+</body>
+</html>

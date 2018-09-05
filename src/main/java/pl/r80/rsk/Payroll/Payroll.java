@@ -19,7 +19,7 @@ public class Payroll implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
 
-    @Column(name = "numer_listy")
+    @Column(name = "nr_listy")
     String payrollNumber;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
