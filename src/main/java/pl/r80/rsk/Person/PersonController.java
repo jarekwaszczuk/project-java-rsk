@@ -65,7 +65,7 @@ public class PersonController implements WebMvcConfigurer {
     }
 
     @GetMapping("/update/{id}")
-    public String updatePerson(@PathVariable Integer id, Model model) {
+    public String updateById(@PathVariable Integer id, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Optional<Person> person = personService.findById(id);
         if (person.isPresent()) {
@@ -77,7 +77,7 @@ public class PersonController implements WebMvcConfigurer {
     }
 
     @GetMapping("/delete/{id}")
-    public String deletePerson(@PathVariable Integer id, Model model) {
+    public String deleteById(@PathVariable Integer id, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Optional<Person> person = personService.findById(id);
         if (person.isPresent()) {

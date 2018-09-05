@@ -61,7 +61,7 @@ public class FirmController implements WebMvcConfigurer {
     }
 
     @GetMapping("/update/{id}")
-    public String updateFirm(@PathVariable Integer id, Model model) {
+    public String updateById(@PathVariable Integer id, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Optional<Firm> firm = firmService.findById(id);
         if (firm.isPresent()) {
@@ -73,7 +73,7 @@ public class FirmController implements WebMvcConfigurer {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteFirm(@PathVariable Integer id, Model model) {
+    public String deleteById(@PathVariable Integer id, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Optional<Firm> firm = firmService.findById(id);
         if (firm.isPresent()) {
