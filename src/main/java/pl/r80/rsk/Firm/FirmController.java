@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import pl.r80.rsk.InterfaceRsk;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,7 +19,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/firms")
-public class FirmController implements WebMvcConfigurer {
+public class FirmController implements WebMvcConfigurer, InterfaceRsk<Firm> {
 
     @Autowired
     private HttpSession httpSession;
@@ -85,11 +86,17 @@ public class FirmController implements WebMvcConfigurer {
         return "stowarzyszenie_delete";
     }
 
-    @GetMapping("/add")
-    public String addFirm(@ModelAttribute Firm firm, Model model) {
+    @Override
+    public String addView(Firm firm, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         return "stowarzyszenie_add";
     }
+
+//    @GetMapping("/add")
+//    public String addFirm(@ModelAttribute Firm firm, Model model) {
+//        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
+//        return "stowarzyszenie_add";
+//    }
 
     @PostMapping("/add")
     public String add(@ModelAttribute @Valid Firm firm, BindingResult bindingResult, Model model) {
@@ -111,6 +118,16 @@ public class FirmController implements WebMvcConfigurer {
         return "stowarzyszenie_read";
     }
 
+    @PostMapping("/update")
+    public String update(@Valid Firm firm, BindingResult bindingResult, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
+        if (bindingResult.hasErrors()) {
+            return "stowarzyszenie_update";
+        }
+        firmService.update(firm);
+        return "stowarzyszenie_read";
+    }
+
     @GetMapping("/change")
     public String changeFirmKontekst(@ModelAttribute Firm firm, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
@@ -128,16 +145,5 @@ public class FirmController implements WebMvcConfigurer {
         request.getSession().setAttribute("KONTEKST", firm);
         model.addAttribute("firmKontekst", firm);
         return "logged";
-    }
-
-    //todo
-    @PostMapping("/update")
-    public String update(@Valid Firm firm, BindingResult bindingResult, Model model) {
-        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
-        if (bindingResult.hasErrors()) {
-            return "stowarzyszenie_update";
-        }
-        firmService.update(firm);
-        return "stowarzyszenie_read";
     }
 }
