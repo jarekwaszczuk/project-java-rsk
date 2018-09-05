@@ -8,7 +8,7 @@ import java.util.Optional;
 @Service
 public class AccessService {
 
-    public final AccessRepository accessRepository;
+    private final AccessRepository accessRepository;
 
     @Autowired
     public AccessService(AccessRepository accessRepository) {

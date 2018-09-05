@@ -24,9 +24,9 @@ public class EmploymentController implements WebMvcConfigurer {
     @Autowired
     private HttpSession httpSession;
 
-    public final EmploymentService employmentService;
-    public final PersonRepository personRepository;
-    public final FirmRepository firmRepository;
+    private final EmploymentService employmentService;
+    private final PersonRepository personRepository;
+    private final FirmRepository firmRepository;
 
     @Autowired
     public EmploymentController(EmploymentService employmentService, PersonRepository personRepository, FirmRepository firmRepository) {

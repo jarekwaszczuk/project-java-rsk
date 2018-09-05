@@ -23,7 +23,7 @@ public class FirmController implements WebMvcConfigurer {
     @Autowired
     private HttpSession httpSession;
 
-    public final FirmService firmService;
+    private final FirmService firmService;
 
     @Autowired
     public FirmController(FirmService firmService) {
