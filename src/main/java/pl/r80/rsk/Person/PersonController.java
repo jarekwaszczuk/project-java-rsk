@@ -11,6 +11,7 @@ import pl.r80.rsk.Employment.Employment;
 import pl.r80.rsk.Employment.EmploymentService;
 import pl.r80.rsk.Firm.Firm;
 import pl.r80.rsk.Firm.FirmService;
+import pl.r80.rsk.InterfaceRsk;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -19,7 +20,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/persons")
-public class PersonController implements WebMvcConfigurer {
+public class PersonController implements WebMvcConfigurer, InterfaceRsk<Person> {
 
     @Autowired
     private HttpSession httpSession;
@@ -90,7 +91,7 @@ public class PersonController implements WebMvcConfigurer {
     }
 
     @GetMapping("/add")
-    public String addPerson(@ModelAttribute Person person, Model model) {
+    public String addView(@ModelAttribute Person person, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         return "osoby_add";
     }

@@ -11,19 +11,22 @@
     <article>
         <div class="container">
             <div th:each="err : ${#fields.detailedErrors('*')}" th:text=" ${err}" class="error"/>
+            <div class="alert alert-danger" role="alert" th:if="${personId != null}">Błąd w formularzu... popraw</div>
             <form action="#" th:action="@{/employments/add}" th:object="${employment}" method="post"
                   class="needs-validation" novalidate>
                 <div class="row">
                     <div class="form-group col">
                         <label for="inputImieiNazwisko">Imię i Nazwisko</label>
                         <select class="custom-select" id="inputImieiNazwisko" name="personId">
-                                <option th:each="person :${persons}" value="#" th:value="${person.id}" th:text="${person.imie}+' '+${person.nazwisko}">osoba</option>
+                                <option th:if="${personId != person.id}" th:each="person :${persons}" value="#" th:value="${person.id}" th:text="${person.imie}+' '+${person.nazwisko}">osoba</option>
+                                <option th:if="${personId == person.id}" th:each="person :${persons}" value="#" th:value="${person.id}" th:text="${person.imie}+' '+${person.nazwisko}" selected>osoba</option>
                         </select>
                     </div>
                     <div class="form-group col">
                         <label for="inputTypUmowy">Typ umowy</label>
                         <select class="custom-select" id="inputTypUmowy" name="agreementType">
-                                <option th:each="agreementType :${agreementTypes}" value="#" th:value="${agreementType}" th:text="${agreementType.description}">umowa</option>
+                                <option th:if="${agreementType != agreement}"  th:each="agreement :${agreementTypes}" value="#" th:value="${agreement}" th:text="${agreement.description}">umowa</option>
+                                <option th:if="${agreementType == agreement}"  th:each="agreement :${agreementTypes}" value="#" th:value="${agreement}" th:text="${agreement.description}" selected>umowa</option>
                         </select>
                     </div>
                 </div>
@@ -31,7 +34,8 @@
                     <div class="form-group col">
                         <label for="inputStowarzyszenie">Nazwa stowarzyszenia</label>
                         <select class="custom-select" id="inputStowarzyszenie" name="firmId">
-                                <option th:each="firm :${firms}" value="#" th:value="${firm.id}" th:text="${firm.fullName}">firma</option>
+                                <option th:if="${firmId != firm.id}" th:each="firm :${firms}" value="#" th:value="${firm.id}" th:text="${firm.fullName}">firma</option>
+                                <option th:if="${firmId == firm.id}" th:each="firm :${firms}" value="#" th:value="${firm.id}" th:text="${firm.fullName}" selected>firma</option>
                         </select>
                     </div>
                 </div>

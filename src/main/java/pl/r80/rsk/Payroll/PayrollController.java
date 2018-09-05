@@ -3,6 +3,7 @@ package pl.r80.rsk.Payroll;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,15 +11,17 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pl.r80.rsk.Firm.Firm;
 import pl.r80.rsk.Firm.FirmService;
+import pl.r80.rsk.InterfaceRsk;
 import pl.r80.rsk.Person.IllegalPersonException;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/payrolls")
-public class PayrollController implements WebMvcConfigurer {
+public class PayrollController implements WebMvcConfigurer, InterfaceRsk<Payroll> {
 
     @Autowired
     private HttpSession httpSession;
@@ -82,6 +85,21 @@ public class PayrollController implements WebMvcConfigurer {
     public String deleteById(@PathVariable Integer id, Model model) {
 
         return "listyplac_delete";
+    }
+
+    @Override
+    public String addView(Payroll payroll, Model model) {
+        return null;
+    }
+
+    @Override
+    public String add(@Valid Payroll payroll, BindingResult bindingResult, Model model) {
+        return null;
+    }
+
+    @Override
+    public String update(@Valid Payroll payroll, BindingResult bindingResult, Model model) {
+        return null;
     }
 
 
