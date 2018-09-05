@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import pl.r80.rsk.InterfaceRsk;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,12 +19,12 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/firms")
-public class FirmController implements WebMvcConfigurer {
+public class FirmController implements WebMvcConfigurer, InterfaceRsk<Firm> {
 
     @Autowired
     private HttpSession httpSession;
 
-    public final FirmService firmService;
+    private final FirmService firmService;
 
     @Autowired
     public FirmController(FirmService firmService) {
@@ -61,7 +62,7 @@ public class FirmController implements WebMvcConfigurer {
     }
 
     @GetMapping("/update/{id}")
-    public String updateFirm(@PathVariable Integer id, Model model) {
+    public String updateById(@PathVariable Integer id, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Optional<Firm> firm = firmService.findById(id);
         if (firm.isPresent()) {
@@ -73,7 +74,7 @@ public class FirmController implements WebMvcConfigurer {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteFirm(@PathVariable Integer id, Model model) {
+    public String deleteById(@PathVariable Integer id, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         Optional<Firm> firm = firmService.findById(id);
         if (firm.isPresent()) {
@@ -85,11 +86,17 @@ public class FirmController implements WebMvcConfigurer {
         return "stowarzyszenie_delete";
     }
 
-    @GetMapping("/add")
-    public String addFirm(@ModelAttribute Firm firm, Model model) {
+    @Override
+    public String addView(Firm firm, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         return "stowarzyszenie_add";
     }
+
+//    @GetMapping("/add")
+//    public String addFirm(@ModelAttribute Firm firm, Model model) {
+//        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
+//        return "stowarzyszenie_add";
+//    }
 
     @PostMapping("/add")
     public String add(@ModelAttribute @Valid Firm firm, BindingResult bindingResult, Model model) {
@@ -111,6 +118,16 @@ public class FirmController implements WebMvcConfigurer {
         return "stowarzyszenie_read";
     }
 
+    @PostMapping("/update")
+    public String update(@Valid Firm firm, BindingResult bindingResult, Model model) {
+        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
+        if (bindingResult.hasErrors()) {
+            return "stowarzyszenie_update";
+        }
+        firmService.update(firm);
+        return "stowarzyszenie_read";
+    }
+
     @GetMapping("/change")
     public String changeFirmKontekst(@ModelAttribute Firm firm, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
@@ -128,16 +145,5 @@ public class FirmController implements WebMvcConfigurer {
         request.getSession().setAttribute("KONTEKST", firm);
         model.addAttribute("firmKontekst", firm);
         return "logged";
-    }
-
-    //todo
-    @PostMapping("/update")
-    public String update(@Valid Firm firm, BindingResult bindingResult, Model model) {
-        model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
-        if (bindingResult.hasErrors()) {
-            return "stowarzyszenie_update";
-        }
-        firmService.update(firm);
-        return "stowarzyszenie_read";
     }
 }

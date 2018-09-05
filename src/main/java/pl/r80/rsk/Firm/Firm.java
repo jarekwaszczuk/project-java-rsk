@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.r80.rsk.Employment.Employment;
+import pl.r80.rsk.Payroll.Payroll;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -72,4 +73,9 @@ public class Firm implements Serializable {
     @ToString.Exclude
     @OneToMany(mappedBy = "firm", fetch = FetchType.EAGER)
     Set<Employment> employmentSet;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "firm", fetch = FetchType.EAGER)
+    Set<Payroll> payrollSet;
 }

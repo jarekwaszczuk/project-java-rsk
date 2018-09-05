@@ -40,7 +40,7 @@ public class Person implements Serializable {
     String kodPocztowy;
     @NotEmpty(message = "Miejscowość nie może być pusta")
     String miejscowosc;
-    @NotEmpty(message = "Poczgta nie może być pusta")
+    @NotEmpty(message = "Poczta nie może być pusta")
     String poczta;
     @Column(name = "nr_telefonu")
     String nrTelefonu;

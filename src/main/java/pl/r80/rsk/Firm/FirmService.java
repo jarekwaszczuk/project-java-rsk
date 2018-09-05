@@ -8,6 +8,7 @@ import java.util.Optional;
 
 @Service
 public class FirmService {
+
     private final FirmRepository firmRepository;
 
     public FirmService(FirmRepository firmRepository) {

@@ -9,9 +9,11 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import pl.r80.rsk.Firm.Firm;
 import pl.r80.rsk.Firm.FirmRepository;
+import pl.r80.rsk.InterfaceRsk;
 import pl.r80.rsk.Person.Person;
 import pl.r80.rsk.Person.PersonRepository;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
@@ -19,14 +21,16 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/employments")
-public class EmploymentController implements WebMvcConfigurer {
+public class EmploymentController implements WebMvcConfigurer, InterfaceRsk<Employment> {
 
     @Autowired
     private HttpSession httpSession;
+    @Autowired
+    private HttpServletRequest request;
 
-    public final EmploymentService employmentService;
-    public final PersonRepository personRepository;
-    public final FirmRepository firmRepository;
+    private final EmploymentService employmentService;
+    private final PersonRepository personRepository;
+    private final FirmRepository firmRepository;
 
     @Autowired
     public EmploymentController(EmploymentService employmentService, PersonRepository personRepository, FirmRepository firmRepository) {
@@ -61,14 +65,14 @@ public class EmploymentController implements WebMvcConfigurer {
     }
 
     @GetMapping("/update/{id}")
-    public String updateEmployment(@PathVariable Integer id, Model model) {
+    public String updateById(@PathVariable Integer id, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         verifyEmploymentExist(id, model);
         return "zatrudnienie_update";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteEmployment(@PathVariable Integer id, Model model) {
+    public String deleteById(@PathVariable Integer id, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         verifyEmploymentExist(id, model);
         Optional<Employment> employment = employmentService.findById(id);
@@ -77,30 +81,33 @@ public class EmploymentController implements WebMvcConfigurer {
     }
 
     @GetMapping("/add")
-    public String addEmployment(@ModelAttribute Employment employment, Model model) {
+    public String addView(@ModelAttribute Employment employment, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
         addDataPrepare(model);
         return "zatrudnienie_add";
     }
 
     @PostMapping("/add")
-    public String add(@RequestParam Integer personId, @RequestParam AgreementType agreementType, @RequestParam Integer firmId, @RequestParam String hireDate,
-                      @ModelAttribute @Valid Employment employment, BindingResult bindingResult, Model model) {
+    public String add(@ModelAttribute @Valid Employment employment, BindingResult bindingResult, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
-        if (bindingResult.hasErrors()) {
-            addDataPrepare(model);
-            model.addAttribute("personId", personId);
-            model.addAttribute("firmId", firmId);
-            model.addAttribute("agreementType", agreementType);
-            //TODO
-            //z przekazywanych wartośći powyżej zaznaczyć odpowiednie optiony przez selected
-            return "zatrudnienie_add";
-        }
+        Integer personId = Integer.parseInt(request.getParameter("personId"));
+        AgreementType agreementType = AgreementType.valueOf(request.getParameter("agreementType"));
+        Integer firmId = Integer.parseInt(request.getParameter("firmId"));
+        String hireDate = request.getParameter("hireDate");
 
         Optional<Person> personDB = personRepository.findById(personId);
         Person person = personDB.get();
         Optional<Firm> firmDB = firmRepository.findById(firmId);
         Firm firm = firmDB.get();
+
+        if (bindingResult.hasErrors()) {
+            addDataPrepare(model);
+            model.addAttribute("personId", personId);
+            model.addAttribute("firmId", firmId);
+            model.addAttribute("agreementType", agreementType);
+            model.addAttribute("hireDate", hireDate);
+            return "zatrudnienie_add";
+        }
 
         employment.setPerson(person);
         employment.setFirm(firm);

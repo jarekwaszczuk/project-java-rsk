@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="include/head :: head"/>
+
+<body>
+
+<div th:replace="include/menu :: menu"/>
+
+<section>
+    <article>
+        <div class="container">
+            <table class="table table-striped"> <!--table-bordered-->
+                <thead>
+                <tr>
+                    <th scope="col">Właściwość</th>
+                    <th scope="col">Wartość</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Id</th>
+                    <td th:text="${payroll.id}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Nr listy</th>
+                    <td th:text="${payroll.payrollNumber}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Data utworzenia:</th>
+                    <td th:text="${payroll.createDate}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Data wypłaty:</th>
+                    <td th:text="${payroll.paycheckDate}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Data zamknięcia:</th>
+                    <td th:text="${payroll.closeDate}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Suma do wypłaty:</th>
+                    <td th:text="${#numbers.formatDecimal(payroll.sumToPay, 0, 'DEFAULT', 2, 'DEFAULT')+' zł'}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Suma zaliczka PIT4R:</th>
+                    <td th:text="${#numbers.formatDecimal(payroll.sumPIT4R, 0, 'DEFAULT', 2, 'DEFAULT')+' zł'}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Suma ubezpieczeń społecznych:</th>
+                    <td th:text="${#numbers.formatDecimal(payroll.sumSocialInsurance, 0, 'DEFAULT', 2, 'DEFAULT')+' zł'}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Suma ubezpieczeń zdrowotnych:</th>
+                    <td th:text="${#numbers.formatDecimal(payroll.sumHealthInsurance, 0, 'DEFAULT', 2, 'DEFAULT')+' zł'}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Suma Fundusz pracy i FGŚP:</th>
+                    <td th:text="${#numbers.formatDecimal(payroll.sumFpFgsp, 0, 'DEFAULT', 2, 'DEFAULT')+' zł'}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Suma składek ZUS:</th>
+                    <td th:text="${#numbers.formatDecimal(payroll.sumZus, 0, 'DEFAULT', 2, 'DEFAULT')+' zł'}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Ostatnia zmiana:</th>
+                    <td th:text="${payroll.changeLog}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Akcja</th>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Akcje">
+                            <a href="/payrolls/update" th:attr="href=@{'/payrolls/update/'+${payroll.id}}">
+                                <button type="button" class="btn btn-primary">Edycja</button>
+                            </a>
+                            <a href="/payrolls/update" th:href="@{'/payrolls/delete/'+${payroll.id}}" class="delete"  data-confirm="Czy jesteś pewny, że chcesz usunąć tą pozycję?">
+                                <button type="button" class="btn btn-danger">Usuń</button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+</section>
+
+<div th:replace="include/footer :: footer"/>
+<script>
+    $('.delete').on("click", function (e) {
+        e.preventDefault();
+
+        var choice = confirm($(this).attr('data-confirm'));
+
+        if (choice) {
+            window.location.href = $(this).attr('href');
+        }
+    });
+</script>
+</body>
+</html>

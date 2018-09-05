@@ -6,6 +6,8 @@ import pl.r80.rsk.Firm.Firm;
 import pl.r80.rsk.Person.Person;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -29,7 +31,7 @@ public class Employment implements Serializable {
     @Enumerated(EnumType.STRING)
     AgreementType agreementType;
 
-    //@NotEmpty(message = "Wynagrodzenie musi być wypełnione")
+    @NotNull(message = "Wynagrodzenie musi być wypełnione")
     @Column(name = "wynagrodzenie_brutto")
     BigDecimal salary;
 
