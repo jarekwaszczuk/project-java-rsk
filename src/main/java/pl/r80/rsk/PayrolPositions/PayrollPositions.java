@@ -117,4 +117,5 @@ public class PayrollPositions implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_osoby")
     Person person;
+
 }
