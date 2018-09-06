@@ -38,7 +38,7 @@
                             <a href="/payrolls/update" th:attr="href=@{'/payrolls/update/'+${payroll.id}}">
                                 <button type="button" class="btn btn-primary">Edycja</button>
                             </a>
-                            <a href="/payrolls/update" th:href="@{'/payrolls/delete/'+${payroll.id}}" class="delete"  data-confirm="Czy jesteś pewny, że chcesz usunąć tą pozycję?">
+                            <a href="/payrolls/update" th:href="@{'/payrolls/delete/'+${payroll.id}}" class="delete" data-confirm="Czy jesteś pewny, że chcesz usunąć tą pozycję?">
                                 <button type="button" class="btn btn-danger">Usuń</button>
                             </a>
                         </div>
@@ -52,6 +52,16 @@
 </section>
 
 <div th:replace="include/footer :: footer"/>
+<script>
+    $('.delete').on("click", function (e) {
+        e.preventDefault();
 
+        var choice = confirm($(this).attr('data-confirm'));
+
+        if (choice) {
+            window.location.href = $(this).attr('href');
+        }
+    });
+</script>
 </body>
 </html>

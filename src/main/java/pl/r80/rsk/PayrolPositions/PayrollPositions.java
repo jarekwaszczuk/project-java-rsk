@@ -1,8 +1,6 @@
 package pl.r80.rsk.PayrolPositions;
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-import pl.r80.rsk.Employment.AgreementType;
 import pl.r80.rsk.Firm.Firm;
 import pl.r80.rsk.Payroll.Payroll;
 import pl.r80.rsk.Person.Person;
@@ -11,7 +9,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDate;
 
 @Entity
 @Data

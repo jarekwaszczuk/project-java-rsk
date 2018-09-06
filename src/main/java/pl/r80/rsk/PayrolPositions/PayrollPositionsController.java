@@ -19,6 +19,7 @@ import pl.r80.rsk.Person.PersonService;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -43,6 +44,9 @@ public class PayrollPositionsController implements WebMvcConfigurer, InterfaceRs
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/index").setViewName("index");
         registry.addViewController("/listyplacpozycje").setViewName("listyplacpozycje");
+        registry.addViewController("/listyplacpozycje_read").setViewName("listyplacpozycje_read");
+        registry.addViewController("/listyplacpozycje_update").setViewName("listyplacpozycje_update");
+        registry.addViewController("/listyplacpozycje_delete").setViewName("listyplacpozycje_delete");
     }
 
     @Override
@@ -62,21 +66,23 @@ public class PayrollPositionsController implements WebMvcConfigurer, InterfaceRs
     }
 
     @Override
-    public String readOneById(Integer id, Model model) {
+    public String readOneById(@PathVariable Integer id, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
-        return "index";
+        Optional<PayrollPositions> payrollPositions = payrollPositionsService.findById(id);
+        model.addAttribute("payrollPositions", payrollPositions.get());
+        return "listyplacpozycje_read";
     }
 
     @Override
-    public String updateById(Integer id, Model model) {
+    public String updateById(@PathVariable Integer id, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
-        return "index";
+        return "listyplacpozycje_update";
     }
 
     @Override
-    public String deleteById(Integer id, Model model) {
+    public String deleteById(@PathVariable Integer id, Model model) {
         model.addAttribute("firmKontekst", httpSession.getAttribute("KONTEKST"));
-        return "index";
+        return "listyplacpozycje_delete";
     }
 
     @Override
