@@ -12,8 +12,7 @@ public class PayrollPositionsService {
 
     private final PayrollPositionsRepository payrollPositionsRepository;
 
-    @Autowired
-    public PayrollPositionsService(PayrollPositionsRepository payrollPositionsRepository) {
+     public PayrollPositionsService(PayrollPositionsRepository payrollPositionsRepository) {
         this.payrollPositionsRepository = payrollPositionsRepository;
     }
 

@@ -52,10 +52,10 @@ public class PayrollPositionsController implements WebMvcConfigurer, InterfaceRs
         return "index";
     }
 
-    @GetMapping(name = "/payroll/{id}")
-    public String findAllByFirmAndPayroll(@PathVariable Integer idPayroll, Model model){
+    @GetMapping("/payroll/{id}")
+    public String findAllByFirmAndPayroll(@PathVariable Integer id, Model model){
         Firm firm = (Firm) httpSession.getAttribute("KONTEKST");
-        Optional<Payroll> payroll = payrollService.findById(idPayroll);
+        Optional<Payroll> payroll = payrollService.findById(id);
         model.addAttribute("firmKontekst", firm);
         model.addAttribute("listyplacpozycje",payrollPositionsService.findByFirmAndPayroll(firm, payroll.get()));
         return "listyplacpozycje";

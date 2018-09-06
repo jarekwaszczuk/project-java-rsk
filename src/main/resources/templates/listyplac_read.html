@@ -78,6 +78,9 @@
                     <th scope="row">Akcja</th>
                     <td>
                         <div class="btn-group" role="group" aria-label="Akcje">
+                            <a href="/payrollpositions/payroll" th:href="@{'/payrollpositions/payroll/'+${payroll.id}}">
+                                <button type="button" class="btn btn-info">Pozycje</button>
+                            </a>
                             <a href="/payrolls/update" th:attr="href=@{'/payrolls/update/'+${payroll.id}}">
                                 <button type="button" class="btn btn-primary">Edycja</button>
                             </a>
