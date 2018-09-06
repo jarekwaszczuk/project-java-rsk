@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="include/head :: head"/>
+
+<body>
+
+<div th:replace="include/menu :: menu"/>
+
+<section>
+    <article>
+        <div class="container">
+            <table class="table table-striped"> <!--table-bordered-->
+                <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Stowarzyszenie</th>
+                    <th scope="col">Imię i nazwisko</th>
+                    <th scope="col">Za miesiąc</th>
+                    <th scope="col">Nr listy</th>
+                    <th scope="col">Brutto</th>
+                    <th scope="col">Akcja</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="payrollPositions : ${listyplacpozycje}">
+                    <td th:text="${payrollPositions.id}">id</td>
+                    <td th:text="${payrollPositions.firm.name}">id</td>
+                    <td th:text="${payrollPositions.person.imie + ' '+ payrollPositions.person.nazwisko}">id</td>
+                    <td th:text="${payrollPositions.payroll.payrollMonth}">id</td>
+                    <td th:text="${payrollPositions.payroll.payrollNumber}">id</td>
+                    <td th:text="${#numbers.formatDecimal(payrollPositions.wynagrodzenie_brutto, 0, 'DEFAULT', 2, 'DEFAULT')+' zł'}">id</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Akcje">
+                            <a href="/payrollpositions/readone" th:href="@{'/payrollpositions/readone/'+${payrollPositions.id}}">
+                                <button type="button" class="btn btn-info">Podgląd</button>
+                            </a>
+                            <a href="/payrollpositions/update" th:attr="href=@{'/payrollpositions/update/'+${payrollPositions.id}}">
+                                <button type="button" class="btn btn-primary">Edycja</button>
+                            </a>
+                            <a href="/payrollpositions/delete" th:href="@{'/payrollpositions/delete/'+${payrollPositions.id}}" class="delete"  data-confirm="Czy jesteś pewny, że chcesz usunąć tą pozycję?">
+                                <button type="button" class="btn btn-danger">Usuń</button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </article>
+</section>
+
+<div th:replace="include/footer :: footer"/>
+
+</body>
+</html>
