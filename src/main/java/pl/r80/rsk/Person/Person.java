@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import pl.r80.rsk.Employment.Employment;
+import pl.r80.rsk.PayrolPositions.PayrollPositions;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -52,4 +53,9 @@ public class Person implements Serializable {
     @ToString.Exclude
     @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
     Set<Employment> employmentSet;
+
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "person", fetch = FetchType.EAGER)
+    Set<PayrollPositions> payrollPositionsSet;
 }

@@ -16,4 +16,6 @@ public interface PayrollPositionsRepository extends CrudRepository<PayrollPositi
     List<PayrollPositions> findByPerson(Person person);
 
     List<PayrollPositions> findByPayroll(Payroll payroll);
+
+    List<PayrollPositions> findByFirmAndPayroll(Firm firm, Payroll payroll);
 }
