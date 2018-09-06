@@ -66,5 +66,4 @@ public class Payroll implements Serializable {
     @ManyToOne
     @JoinColumn(name = "id_stowarzyszenia")
     Firm firm;
-
 }
