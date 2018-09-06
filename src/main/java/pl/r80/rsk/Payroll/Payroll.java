@@ -1,14 +1,19 @@
 package pl.r80.rsk.Payroll;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.r80.rsk.Employment.AgreementType;
 import pl.r80.rsk.Firm.Firm;
+import pl.r80.rsk.PayrolPositions.PayrollPositions;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.util.Set;
 
 @Entity
 @Data
@@ -21,6 +26,13 @@ public class Payroll implements Serializable {
 
     @Column(name = "nr_listy")
     String payrollNumber;
+
+    @Column(name = "typ_umowy")
+    @Enumerated(EnumType.STRING)
+    AgreementType agreementType;
+
+    @Column(name="wynagrodzenie_za_miesiac")
+    String payrollMonth;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_utworzenia")
@@ -59,4 +71,8 @@ public class Payroll implements Serializable {
     @JoinColumn(name = "id_stowarzyszenia")
     Firm firm;
 
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @OneToMany(mappedBy = "payroll", fetch = FetchType.EAGER)
+    Set<PayrollPositions> payrollPositionsSet;
 }
