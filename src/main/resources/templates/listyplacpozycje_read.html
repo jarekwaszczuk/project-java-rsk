@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="include/head :: head"/>
+
+<body>
+
+<div th:replace="include/menu :: menu"/>
+
+<section>
+    <article>
+        <div class="container">
+            <table class="table table-striped"> <!--table-bordered-->
+                <thead>
+                <tr>
+                    <th scope="col">Właściwość</th>
+                    <th scope="col">Wartość</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row">Id</th>
+                    <td th:text="${payrollPositions.id}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Stowarzyszenie</th>
+                    <td th:text="${payrollPositions.firm.fullName}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Nr listy</th>
+                    <td th:text="${payrollPositions.payroll.payrollNumber}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Za jaki miesiąc</th>
+                    <td th:text="${payrollPositions.payroll.payrollMonth}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Typ umowy</th>
+                    <td th:text="${payrollPositions.payroll.agreementType.description}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Osoba</th>
+                    <td th:text="${payrollPositions.person.imie+' '+payrollPositions.person.nazwisko}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Wynagrodzenie brutto:</th>
+                    <td th:text="${#numbers.formatDecimal(payrollPositions.wynagrodzenie_brutto, 0, 'DEFAULT', 2, 'DEFAULT')+' zł'}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Ostatnia zmiana:</th>
+                    <td th:text="${payrollPositions.changeLog}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Akcja</th>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Akcje">
+                            <a href="payrollpositions/payroll" th:attr="href=@{'/payrollpositions/payroll/'+${payrollPositions.payroll.id}}">
+                                <button type="button" class="btn btn-success">Wróć do listy pozycji</button>
+                            </a>
+                            <a href="/payrollpositions/update" th:attr="href=@{'/payrollpositions/update/'+${payrollPositions.id}}">
+                                <button type="button" class="btn btn-primary">Edycja</button>
+                            </a>
+                            <a href="/payrollpositions/update" th:href="@{'/payrollpositions/delete/'+${payrollPositions.id}}" class="delete" data-confirm="Czy jesteś pewny, że chcesz usunąć tą pozycję?">
+                                <button type="button" class="btn btn-danger">Usuń</button>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </article>
+</section>
+
+<div th:replace="include/footer :: footer"/>
+<script>
+    $('.delete').on("click", function (e) {
+        e.preventDefault();
+
+        var choice = confirm($(this).attr('data-confirm'));
+
+        if (choice) {
+            window.location.href = $(this).attr('href');
+        }
+    });
+</script>
+</body>
+</html>

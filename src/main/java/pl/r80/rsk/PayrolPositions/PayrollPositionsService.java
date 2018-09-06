@@ -1,11 +1,11 @@
 package pl.r80.rsk.PayrolPositions;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.r80.rsk.Firm.Firm;
 import pl.r80.rsk.Payroll.Payroll;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PayrollPositionsService {
@@ -18,5 +18,9 @@ public class PayrollPositionsService {
 
     public List<PayrollPositions> findByFirmAndPayroll(Firm firm, Payroll payroll) {
         return payrollPositionsRepository.findByFirmAndPayroll(firm, payroll);
+    }
+
+    public Optional<PayrollPositions> findById(Integer id) {
+         return payrollPositionsRepository.findById(id);
     }
 }
