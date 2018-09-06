@@ -2,6 +2,7 @@ package pl.r80.rsk.Payroll;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.r80.rsk.Employment.AgreementType;
 import pl.r80.rsk.Firm.Firm;
 
 import javax.persistence.*;
@@ -21,6 +22,13 @@ public class Payroll implements Serializable {
 
     @Column(name = "nr_listy")
     String payrollNumber;
+
+    @Column(name = "typ_umowy")
+    @Enumerated(EnumType.STRING)
+    AgreementType agreementType;
+
+    @Column(name="wynagrodzenie_za_miesiac")
+    String payrollMonth;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "data_utworzenia")

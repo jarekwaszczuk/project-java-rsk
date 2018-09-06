@@ -23,8 +23,16 @@
                     <td th:text="${payroll.id}">id</td>
                 </tr>
                 <tr>
+                    <th scope="row">Typ umowy</th>
+                    <td th:text="${payroll.agreementType.description}">id</td>
+                </tr>
+                <tr>
                     <th scope="row">Nr listy</th>
                     <td th:text="${payroll.payrollNumber}">id</td>
+                </tr>
+                <tr>
+                    <th scope="row">Wynagrodzenie za miesiąc</th>
+                    <td th:text="${payroll.payrollMonth}">id</td>
                 </tr>
                 <tr>
                     <th scope="row">Data utworzenia:</th>
