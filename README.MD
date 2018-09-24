@@ -4,4 +4,8 @@ Projekt realizowany w ramach zaliczenia kursu "Java od Podstaw" organizowanego p
 
 
 Szablon bazy danych w podkatalagu: **src\main\database_template**
+Podstawowe rekordy do bazy (**dostęp** i **stowarzyszenie**)
+
 Zaimportowac do bazy: **rsk_projekt_java**
+
+Domyślny użytkownik: **demo** hasło: **demo**
